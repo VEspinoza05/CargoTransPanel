@@ -1,30 +1,31 @@
-import { useState } from 'react'
 import './App.css'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Auth Routes */}
-        <Route element={<AuthLayout />}>
-          <Route path="/login" element={<LoginPage onLogin={() => setIsAuthenticated(true)} />} />
-        </Route>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Auth Routes */}
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<LoginPage/>} />
+          </Route>
 
-        {/* Protected Routes */}
-        <Route
-          element={isAuthenticated ? <MainLayout /> : <Navigate to="/login" />}
-        >
-          <Route path="/" element={<HomePage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          {/* Protected Routes */}
+          <Route element={<PrivateRoute/>}>
+            <Route element={<MainLayout/>}>
+              <Route path="/" element={<HomePage />} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
