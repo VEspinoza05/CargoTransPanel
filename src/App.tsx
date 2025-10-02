@@ -2,10 +2,11 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
-import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import ShipmentsPage from './pages/ShipmentsPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           {/* Protected Routes */}
           <Route element={<PrivateRoute/>}>
             <Route element={<MainLayout/>}>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<HomePage/>} />
+              <Route path="/shipments" element={<ShipmentsPage />} />
             </Route>
           </Route>
         </Routes>
