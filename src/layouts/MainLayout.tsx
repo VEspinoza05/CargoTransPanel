@@ -46,7 +46,9 @@ export default function MainLayout() {
           </Sidebar>
         </SidebarProvider>
       </aside>
-      <Outlet />
+      <main className="flex flex-col w-full p-4">
+        <Outlet />
+      </main>
     </div>
   );
 }
