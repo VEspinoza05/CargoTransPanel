@@ -1,25 +1,37 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
 import type { User } from "firebase/auth";
-import { auth } from "../lib/firebaseConfig";
 
 interface AuthContextType {
   user: User | null;
+  role: string | null;
   loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
+  role: null,
   loading: true,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [role, setRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+    const auth = getAuth();
+
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
+
+      if(firebaseUser) {
+        const tokenResult = await firebaseUser.getIdTokenResult(true);
+        setRole(String(tokenResult.claims.role) ?? null);
+      } else {
+        setRole(null)
+      }
+
       setLoading(false);
     });
 
@@ -27,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, role, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );

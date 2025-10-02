@@ -13,11 +13,12 @@ import { Sidebar,
 } from "../components/ui/sidebar";
 import { getAuth, signOut  } from "firebase/auth";
 import { Button } from "../components/ui/button";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function MainLayout() {
   const location = useLocation()
   const auth = getAuth();
-  const user = auth.currentUser;
+  const { user, role, loading } = useAuth();
 
   const handleLogout = () => {
     signOut(auth)
@@ -27,6 +28,10 @@ export default function MainLayout() {
     { name: "Inicio", href:"/" },
     { name: "Envios", href:"/shipments" },
   ]
+
+  if (loading) return <p>Cargando...</p>;
+
+  if (!user) return <p>No estás autenticado</p>;
 
   return (
     <div className="w-screen h-screen flex">
@@ -55,6 +60,7 @@ export default function MainLayout() {
             <SidebarFooter>
               <p>{user?.displayName}</p>
               <p>{user?.email}</p>
+              <p>{role}</p>
               <Button onClick={handleLogout}>
                 Cerrar sesion
               </Button>
