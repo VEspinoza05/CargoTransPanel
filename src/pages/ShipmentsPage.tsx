@@ -43,7 +43,7 @@ export default function ShipmentsPage() {
   return(
     <>
       <h1>Envios</h1>
-      <div className="container mx-auto py-10">
+      <div className="container py-10">
         <DataTable columns={ColumnsShipment} data={shipments} />
       </div>
     </>

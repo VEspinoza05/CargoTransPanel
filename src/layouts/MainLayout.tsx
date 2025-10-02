@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation } from "react-router";
 import { Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -10,9 +11,17 @@ import { Sidebar,
   SidebarMenuItem, 
   SidebarProvider
 } from "../components/ui/sidebar";
+import { getAuth, signOut  } from "firebase/auth";
+import { Button } from "../components/ui/button";
 
 export default function MainLayout() {
   const location = useLocation()
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  const handleLogout = () => {
+    signOut(auth)
+  }
 
   const navLinks = [
     { name: "Inicio", href:"/" },
@@ -24,10 +33,10 @@ export default function MainLayout() {
       <aside>
         <SidebarProvider>
           <Sidebar>
+            <SidebarHeader>
+              <h1>CargoTransPanel</h1>
+            </SidebarHeader>
             <SidebarContent>
-              <SidebarHeader>
-                <h1>CargoTransPanel</h1>
-              </SidebarHeader>
               <SidebarGroup>
                 <SidebarGroupLabel>Vistas</SidebarGroupLabel>
                 <SidebarGroupContent>
@@ -43,10 +52,17 @@ export default function MainLayout() {
                 </SidebarGroupContent>
               </SidebarGroup>
             </SidebarContent>
+            <SidebarFooter>
+              <p>{user?.displayName}</p>
+              <p>{user?.email}</p>
+              <Button onClick={handleLogout}>
+                Cerrar sesion
+              </Button>
+            </SidebarFooter>
           </Sidebar>
         </SidebarProvider>
       </aside>
-      <main className="flex flex-col w-full p-4">
+      <main className="flex flex-col w-full p-4 overflow-auto">
         <Outlet />
       </main>
     </div>
