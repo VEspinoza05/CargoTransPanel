@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from "react-router";
+import { href, Link, Outlet, useLocation } from "react-router";
 import { Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -24,10 +24,19 @@ export default function MainLayout() {
     signOut(auth)
   }
 
-  const navLinks = [
+  const adminLinks = [
     { name: "Inicio", href:"/" },
     { name: "Envios", href:"/shipments" },
   ]
+
+  const branchManagerLinks = [
+    { name: "Inicio", href:"/" },
+    { name: "Salientes", href:"/Outgoing" },
+    { name: "Entrantes", href:"/Incoming"}
+  ]
+
+  const navLinks = (role === "Administrador") ? adminLinks : 
+    (role === "Encargado") ? branchManagerLinks : [];
 
   if (loading) return <p>Cargando...</p>;
 
