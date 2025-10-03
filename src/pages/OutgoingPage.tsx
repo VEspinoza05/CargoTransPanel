@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { IShipmentModel } from "../models/shipment";
 import { ColumnsShipment } from "../components/ColumnsShipment";
 import { DataTable } from "../components/DataTable";
-import { getShipments } from "../services/ShipmentService";
+import { createShipment, getShipments } from "../services/ShipmentService";
 import { Button } from "../components/ui/button";
 import {
   Dialog,
@@ -16,10 +16,16 @@ import {
 } from "../components/ui/dialog"
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
+import type { NewShipmentDTO } from "../dtos/NewShipmentDTO";
 
 export default function OutgoingPage() {
   const [shipments, setShipments] = useState<IShipmentModel[]>([]);
   const [loadingShipments, setLoadingShipments] = useState(true);
+  const [newShipment, setNewShipment] = useState<NewShipmentDTO>({
+    shippingDate: new Date(),
+    customerName: "",
+    destinationBranch: "",
+  })
 
   useEffect(() => {
     const fetchShipments = async () => {
@@ -35,6 +41,25 @@ export default function OutgoingPage() {
 
     fetchShipments();
   }, []);
+
+  const handleSubmit = async () => {
+    try {
+      await createShipment(newShipment);
+      alert("Envio creado con exito")
+    }
+    catch (error) {
+      console.error("Error al cargar los envios:", error);
+    }
+    
+  }
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setNewShipment((prevShipmentData) => ({
+      ...prevShipmentData,
+      [name]: value,
+    }));
+  }
 
   return(
     <>
@@ -55,18 +80,18 @@ export default function OutgoingPage() {
                 <div className="grid gap-4">
                   <div className="grid gap-3">
                     <Label htmlFor="destination-1">Lugar de destino</Label>
-                    <Input id="destination-1" name="destination"/>
+                    <Input onChange={handleInputChange} id="destination-1" name="destinationBranch"/>
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="clientName-1">Nombre de cliente</Label>
-                    <Input id="clientName-1" name="clientName"/>
+                    <Input onChange={handleInputChange} id="clientName-1" name="customerName"/>
                   </div>
                 </div>
                 <DialogFooter>
                   <DialogClose asChild>
                     <Button variant="outline">Cancelar</Button>
                   </DialogClose>
-                  <Button type="submit">Guardar</Button>
+                  <Button onClick={handleSubmit} type="submit">Guardar</Button>
                 </DialogFooter>
               </DialogContent>
             </form>

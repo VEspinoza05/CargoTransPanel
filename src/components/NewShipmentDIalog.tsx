@@ -16,6 +16,9 @@ export function NewShipmentDialog() {
   return (
     <Dialog>
       <form>
+        <DialogTrigger asChild>
+          <Button variant="outline">Open Dialog</Button>
+        </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
