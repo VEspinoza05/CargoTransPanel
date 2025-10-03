@@ -1,10 +1,8 @@
 import axios from "axios";
 import { getAuth } from "firebase/auth";
 
-const API_URL = "http://localhost:5097/api"
-
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: import.meta.env.VITE_CARGOTRANS_API_URL,
 });
 
 api.interceptors.request.use(async (config) => {
