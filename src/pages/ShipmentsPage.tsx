@@ -1,51 +1,39 @@
 import { DataTable } from "../components/DataTable";
 import { ColumnsShipment } from "../components/ColumnsShipment";
 import type { IShipmentModel } from "../models/shipment";
+import { signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { getShipments } from "../services/ShipmentService";
 
 export default function ShipmentsPage() {
-  const shipments: IShipmentModel[] = [
-  {
-    "shipmentId": "MqpLVru728FCV5vkpaH4",
-    "shippingDate": new Date("2025-10-01T02:41:50.909Z"),
-    "originBranch": "Juigalpa",
-    "destinationBranch": "Esteli",
-    "state": "Enviado",
-    "customerName": "Pedro Diaz",
-    "userId": "8W7HydccRJu4Yc1DwPkX",
-    "userData": {
-      "userId": "8W7HydccRJu4Yc1DwPkX",
-      "name": "Juan HERNANDEZ",
-      "email": "juan@gmail.com",
-      "password": "hashed-password",
-      "role": "Encargado",
-      "branchId": "1"
-    }
-  },
-  {
-    "shipmentId": "MqpLVru728FCV5vkpaH4",
-    "shippingDate": new Date("2025-10-01T02:41:50.909Z"),
-    "originBranch": "Juigalpa",
-    "destinationBranch": "Managua",
-    "state": "Recibido",
-    "customerName": "Gonzalo Mena",
-    "userId": "8W7HydccRJu4Yc1DwPkX",
-    "userData": {
-      "userId": "8W7HydccRJu4Yc1DwPkX",
-      "name": "Juan Gonzalez",
-      "email": "juan@gmail.com",
-      "password": "hashed-password",
-      "role": "Encargado",
-      "branchId": "1"
-    }
-  }
-]
+  const [shipments, setShipments] = useState<IShipmentModel[]>([]);
+  const [loadingShipments, setLoadingShipments] = useState(true);
+
+  useEffect(() => {
+    const fetchShipments = async () => {
+      try {
+        const data = await getShipments();
+        console.log(JSON.stringify(data))
+        setShipments(data);
+      } catch (error) {
+        console.error("Error al cargar los envios:", error);
+      } finally {
+        setLoadingShipments(false);
+      }
+    };
+
+    fetchShipments();
+  }, []);
 
   return(
     <>
       <h1>Envios</h1>
-      <div className="container py-10">
-        <DataTable columns={ColumnsShipment} data={shipments} />
-      </div>
+      {loadingShipments ? 
+        <p>Cargando datos...</p> :
+        <div className="container py-10">
+          <DataTable columns={ColumnsShipment} data={shipments} />
+        </div>
+      }
     </>
   )
 }

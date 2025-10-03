@@ -28,23 +28,7 @@ export const ColumnsShipment: ColumnDef<IShipmentModel>[] = [
     header: "customerName",
   },
   {
-    accessorKey: "userData.name",
+    accessorKey: "userName",
     header: "SendedBy",
-  },
-  {
-    id:"Actions",
-    header:"Actions",
-    cell: () => {
-      return(
-        <>
-          <Button variant="default">
-            Actualizar 
-          </Button>
-          <Button variant="destructive">
-            Eliminar 
-          </Button>
-        </>
-      )
-    }
   }
 ]

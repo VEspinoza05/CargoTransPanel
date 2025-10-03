@@ -8,5 +8,5 @@ export interface IShipmentModel {
   state: string,
   customerName: string,
   userId: string,
-  userData: IUserModel,
+  userName: string,
 }
