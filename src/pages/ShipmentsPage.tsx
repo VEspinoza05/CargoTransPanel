@@ -1,7 +1,6 @@
 import { DataTable } from "../components/DataTable";
 import { ColumnsShipment } from "../components/ColumnsShipment";
-import type { IShipmentModel } from "../models/shipment";
-import { signOut } from "firebase/auth";
+import type { IShipmentModel } from "../models/Shipment";
 import { useEffect, useState } from "react";
 import { getShipments } from "../services/ShipmentService";
 

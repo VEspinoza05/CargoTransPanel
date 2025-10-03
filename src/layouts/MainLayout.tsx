@@ -1,4 +1,4 @@
-import { href, Link, Outlet, useLocation } from "react-router";
+import { Link, Outlet } from "react-router";
 import { Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -16,7 +16,6 @@ import { Button } from "../components/ui/button";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function MainLayout() {
-  const location = useLocation()
   const auth = getAuth();
   const { user, role, loading } = useAuth();
 

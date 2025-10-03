@@ -1,5 +1,3 @@
-import type { IUserModel } from "./User";
-
 export interface IShipmentModel {
   shipmentId: string,
   shippingDate: Date,

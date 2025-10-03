@@ -1,6 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import type { IShipmentModel } from "../models/shipment"
-import { Button } from "./ui/button"
+import type { IShipmentModel } from "../models/Shipment"
 
 export const ColumnsShipment: ColumnDef<IShipmentModel>[] = [
   {

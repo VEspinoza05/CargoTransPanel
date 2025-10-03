@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { IShipmentModel } from "../models/shipment";
+import type { IShipmentModel } from "../models/Shipment";
 import { ColumnsShipment } from "../components/ColumnsShipment";
 import { DataTable } from "../components/DataTable";
 import { getShipments } from "../services/ShipmentService";

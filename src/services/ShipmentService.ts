@@ -1,5 +1,5 @@
 import axios from "../api/axios";
-import type { IShipmentModel } from "../models/shipment";
+import type { IShipmentModel } from "../models/Shipment";
 import type { NewShipmentDTO } from "../dtos/NewShipmentDTO";
 
 export const getShipments = async (isOriginOrDestination = ""): Promise<IShipmentModel[]> => {
