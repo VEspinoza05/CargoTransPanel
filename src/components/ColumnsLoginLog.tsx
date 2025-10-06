@@ -22,4 +22,8 @@ export const ColumnsLoginLog: ColumnDef<ILoginLogModel>[] = [
     accessorKey: "timestamp",
     header: "timestamp",
   },
+  {
+    accessorKey: "role",
+    header: "role",
+  },
 ]
