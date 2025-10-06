@@ -11,7 +11,7 @@ export const ColumnsLoginLog: ColumnDef<ILoginLogModel>[] = [
     header: "userId",
   },
   {
-    accessorKey: "userName",
+    accessorKey: "username",
     header: "userName",
   },
   {
