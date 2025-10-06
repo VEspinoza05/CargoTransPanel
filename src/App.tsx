@@ -9,6 +9,7 @@ import ShipmentsPage from './pages/ShipmentsPage';
 import HomePage from './pages/HomePage';
 import OutgoingPage from './pages/OutgoingPage';
 import IncomingPage from './pages/IncomingPage';
+import LoginLogPage from './pages/LoginLogPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="/shipments" element={<ShipmentsPage />} />
               <Route path="/Outgoing" element={<OutgoingPage />} />
               <Route path="/Incoming" element={<IncomingPage />} />
+              <Route path="/LoginLog" element={<LoginLogPage />} />
             </Route>
           </Route>
         </Routes>

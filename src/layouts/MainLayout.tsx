@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { href, Link, Outlet } from "react-router";
 import { Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -26,6 +26,7 @@ export default function MainLayout() {
   const adminLinks = [
     { name: "Inicio", href:"/" },
     { name: "Envios", href:"/shipments" },
+    { name: "Inicios de sesion", href:"/LoginLog"}
   ]
 
   const branchManagerLinks = [
