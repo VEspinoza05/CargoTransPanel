@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { login } from "../services/AuthService";
+import { createLoginLog } from "@/services/LoginLogService";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       await login(email, password);
+      createLoginLog();
       navigate("/");
     } catch (error: any) {
       alert(error.message);
