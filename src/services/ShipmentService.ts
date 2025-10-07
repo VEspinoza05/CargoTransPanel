@@ -19,3 +19,8 @@ export const createShipment = async (newShipment: NewShipmentDTO): Promise<any> 
   })
   return response.data;
 }
+
+export const updateShipmentState = async (shipmentId: string, shipmentState: string) => {
+  const response = await axios.put(`/Shipment/${shipmentId}`, { state: shipmentState})
+  return response.data;
+}
