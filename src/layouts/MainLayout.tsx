@@ -14,6 +14,7 @@ import { Sidebar,
 import { getAuth, signOut  } from "firebase/auth";
 import { Button } from "../components/ui/button";
 import { useAuth } from "../contexts/AuthContext";
+import cargotransLogo from "../assets/cargotransLogo.jpg"
 
 export default function MainLayout() {
   const auth = getAuth();
@@ -48,8 +49,8 @@ export default function MainLayout() {
         <SidebarProvider>
           <Sidebar>
             <SidebarHeader>
-              <h1>CargoTransPanel</h1>
-              <h2>{role === "Administrador" ? "Casa matriz" : `Ciudad: ${branchCity}`}</h2>
+              <img src={cargotransLogo} />
+              <h2 className="font-bold text-lg">{role === "Administrador" ? "Casa matriz" : `Ciudad: ${branchCity}`}</h2>
             </SidebarHeader>
             <SidebarContent>
               <SidebarGroup>
@@ -68,6 +69,7 @@ export default function MainLayout() {
               </SidebarGroup>
             </SidebarContent>
             <SidebarFooter>
+              <h3 className="font-bold text-base">Datos de usuario</h3>
               <p>{user?.displayName}</p>
               <p>{user?.email}</p>
               <p>{role}</p>

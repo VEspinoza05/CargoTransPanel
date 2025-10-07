@@ -4,23 +4,23 @@ import type { IShipmentModel } from "../models/Shipment"
 export const ColumnsShipment: ColumnDef<IShipmentModel>[] = [
   {
     accessorKey: "shipmentId",
-    header: "shipmentId",
+    header: "Id de envío",
   },
   {
     accessorKey: "shippingDate",
-    header: "shippingDate",
+    header: "Fecha de envío",
   },
   {
     accessorKey: "originBranch",
-    header: "originBranch",
+    header: "Sucursal origen",
   },
   {
     accessorKey: "destinationBranch",
-    header: "destinationBranch",
+    header: "Sucursal destino",
   },
   {
     accessorKey: "state",
-    header: "state",
+    header: "Estado",
     cell: ({row}) => {
       const shipmentState = String(row.getValue("state"));
 
@@ -33,10 +33,10 @@ export const ColumnsShipment: ColumnDef<IShipmentModel>[] = [
   },
   {
     accessorKey: "customerName",
-    header: "customerName",
+    header: "Nombre cliente",
   },
   {
     accessorKey: "userName",
-    header: "SendedBy",
+    header: "Registrado por",
   }
 ]

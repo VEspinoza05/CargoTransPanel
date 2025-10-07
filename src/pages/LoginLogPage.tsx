@@ -26,7 +26,7 @@ export default function LoginLogPage() {
 
   return(
     <>
-      <h1>Envios</h1>
+      <h1 className="font-bold text-4xl">Registro de inicios de sesión</h1>
       {loadingLoginLogs ? 
         <p>Cargando datos...</p> :
         <div className="container py-10">

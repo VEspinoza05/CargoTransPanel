@@ -26,7 +26,7 @@ export default function ShipmentsPage() {
 
   return(
     <>
-      <h1>Envios</h1>
+      <h1 className="font-bold text-4xl">Envíos</h1>
       {loadingShipments ? 
         <p>Cargando datos...</p> :
         <div className="container py-10">
