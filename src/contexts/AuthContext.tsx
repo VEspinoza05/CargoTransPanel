@@ -5,18 +5,21 @@ import type { User } from "firebase/auth";
 interface AuthContextType {
   user: User | null;
   role: string | null;
+  branchCity: string | null;
   loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   role: null,
+  branchCity: null,
   loading: true,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<string | null>(null);
+  const [branchCity, setBranchCity] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,8 +31,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if(firebaseUser) {
         const tokenResult = await firebaseUser.getIdTokenResult(true);
         setRole(String(tokenResult.claims.role) ?? null);
+        setBranchCity(String(tokenResult.claims.branchCity) ?? null);
       } else {
         setRole(null)
+        setBranchCity(null)
       }
 
       setLoading(false);
@@ -39,7 +44,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, role, loading }}>
+    <AuthContext.Provider value={{ user, role, loading, branchCity }}>
       {!loading && children}
     </AuthContext.Provider>
   );

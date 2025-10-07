@@ -17,7 +17,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function MainLayout() {
   const auth = getAuth();
-  const { user, role, loading } = useAuth();
+  const { user, role, branchCity, loading } = useAuth();
 
   const handleLogout = () => {
     signOut(auth)
@@ -49,6 +49,7 @@ export default function MainLayout() {
           <Sidebar>
             <SidebarHeader>
               <h1>CargoTransPanel</h1>
+              <h2>{role === "Administrador" ? "Casa matriz" : `Ciudad: ${branchCity}`}</h2>
             </SidebarHeader>
             <SidebarContent>
               <SidebarGroup>
