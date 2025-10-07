@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { login } from "../services/AuthService";
 import { createLoginLog } from "@/services/LoginLogService";
+import cargotransLogo from "../assets/cargotransLogo.jpg"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <img src={cargotransLogo} />
       <h2 className="text-xl font-bold">Iniciar Sesión</h2>
       <input
         type="email"
