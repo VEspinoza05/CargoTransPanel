@@ -64,8 +64,8 @@ export default function OutgoingPage() {
 
   return(
     <>
-      <div className="flex justify-between">
-        <h1>Salientes</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="font-bold text-4xl">Salientes</h1>
           <Dialog>
             <form>
               <DialogTrigger asChild>

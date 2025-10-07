@@ -31,7 +31,7 @@ export default function IncomingPage() {
   const ColumnsShipmentIncoming: ColumnDef<IShipmentModel>[] = [...ColumnsShipment]
   ColumnsShipmentIncoming.push({
     id:"Actions",
-    header:"Actions",
+    header:"Acciones",
     cell: ({row}) => {
       const shipmentToUpdate = row.original;
 
@@ -71,7 +71,7 @@ export default function IncomingPage() {
 
   return(
     <>
-      <h1>Entrantes</h1>
+      <h1 className="font-bold text-4xl">Entrantes</h1>
       {loadingShipments ? 
         <p>Cargando datos...</p> :
         <div className="container py-10">

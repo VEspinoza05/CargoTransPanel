@@ -1,5 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table"
 import type { IShipmentModel } from "../models/Shipment"
+import { formatInTimeZone } from 'date-fns-tz';
 
 export const ColumnsShipment: ColumnDef<IShipmentModel>[] = [
   {
@@ -9,6 +10,15 @@ export const ColumnsShipment: ColumnDef<IShipmentModel>[] = [
   {
     accessorKey: "shippingDate",
     header: "Fecha de envío",
+    cell: ({row}) => {
+      const shipmentDate = String(row.getValue("shippingDate"));
+
+      return(
+        <>
+          {formatInTimeZone(shipmentDate, 'America/Costa_Rica', 'dd-MM-yyyy hh:mm a')}
+        </>
+      )
+    }
   },
   {
     accessorKey: "originBranch",
