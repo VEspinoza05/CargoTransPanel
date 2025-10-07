@@ -5,4 +5,5 @@ export interface ILoginLogModel {
   userEmail: string,
   timestamp: Date,
   role: string,
+  branchCity: string,
 }

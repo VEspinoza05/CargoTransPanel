@@ -36,4 +36,8 @@ export const ColumnsLoginLog: ColumnDef<ILoginLogModel>[] = [
     accessorKey: "role",
     header: "Rol",
   },
+  {
+    accessorKey: "branchCity",
+    header: "Ciudad sucursal",
+  },
 ]
