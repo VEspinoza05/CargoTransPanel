@@ -27,25 +27,26 @@ export default function OutgoingPage() {
     destinationBranch: "",
   })
 
-  useEffect(() => {
-    const fetchShipments = async () => {
-      try {
-        const data = await getShipments("origin");
-        setShipments(data);
-      } catch (error) {
-        console.error("Error al cargar los envios:", error);
-      } finally {
-        setLoadingShipments(false);
-      }
-    };
+  const fetchShipments = async () => {
+    try {
+      const data = await getShipments("origin");
+      setShipments(data);
+    } catch (error) {
+      console.error("Error al cargar los envios:", error);
+    } finally {
+      setLoadingShipments(false);
+    }
+  };
 
+  useEffect(() => {
     fetchShipments();
   }, []);
 
   const handleSubmit = async () => {
     try {
       await createShipment(newShipment);
-      alert("Envio creado con exito")
+      alert("Envio creado con exito");
+      await fetchShipments();
     }
     catch (error) {
       console.error("Error al cargar los envios:", error);
