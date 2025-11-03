@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import OutgoingPage from './pages/OutgoingPage';
 import IncomingPage from './pages/IncomingPage';
 import LoginLogPage from './pages/LoginLogPage';
+import Dashboard from './pages/Adquisitions/Dashboard';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/Outgoing" element={<OutgoingPage />} />
               <Route path="/Incoming" element={<IncomingPage />} />
               <Route path="/LoginLog" element={<LoginLogPage />} />
+              <Route path="/DashboardAdquisitons" element={<Dashboard/>} />
             </Route>
           </Route>
         </Routes>
