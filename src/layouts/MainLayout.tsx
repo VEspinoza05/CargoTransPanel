@@ -30,6 +30,7 @@ export default function MainLayout() {
     { name: "Inicios de sesion", href:"/LoginLog"},
     { name: "Dashboard Compras", href:"/Acquisitions"},
     { name: "Compras", href:"/Acquisitions/Purchases"},
+    { name: "Gestion de empleados", href:"/HumanResources/EmployeesManagement"},
   ]
 
   const branchManagerLinks = [
