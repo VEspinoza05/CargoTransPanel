@@ -11,6 +11,7 @@ import OutgoingPage from './pages/OutgoingPage';
 import IncomingPage from './pages/IncomingPage';
 import LoginLogPage from './pages/LoginLogPage';
 import AcquisitionsDashboard from './pages/Acquisitions/AcquisitionsDashboard';
+import Purchases from './pages/Acquisitions/Purchases';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               
               <Route path='/Acquisitions'>
                 <Route index element={<AcquisitionsDashboard />} />
+                <Route path='Purchases' element={<Purchases />} />
               </Route>
             </Route>
           </Route>
