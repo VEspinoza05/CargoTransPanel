@@ -22,7 +22,7 @@ const pieData = [
 
 const COLORS = ["#2563eb", "#22c55e", "#eab308", "#f97316", "#94a3b8"]
 
-export default function Dashboard() {
+export default function AcquisitionsDashboard() {
   return (
     <div className="space-y-6">
       {/* Título principal */}

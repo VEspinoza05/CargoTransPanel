@@ -28,7 +28,7 @@ export default function MainLayout() {
     { name: "Inicio", href:"/" },
     { name: "Envios", href:"/shipments" },
     { name: "Inicios de sesion", href:"/LoginLog"},
-    { name: "Dashboard Compras", href:"/DashboardAdquisitons"}
+    { name: "Dashboard Compras", href:"/Acquisitions"},
   ]
 
   const branchManagerLinks = [

@@ -10,7 +10,7 @@ import HomePage from './pages/HomePage';
 import OutgoingPage from './pages/OutgoingPage';
 import IncomingPage from './pages/IncomingPage';
 import LoginLogPage from './pages/LoginLogPage';
-import Dashboard from './pages/Adquisitions/Dashboard';
+import AcquisitionsDashboard from './pages/Acquisitions/AcquisitionsDashboard';
 
 function App() {
   return (
@@ -30,7 +30,10 @@ function App() {
               <Route path="/Outgoing" element={<OutgoingPage />} />
               <Route path="/Incoming" element={<IncomingPage />} />
               <Route path="/LoginLog" element={<LoginLogPage />} />
-              <Route path="/DashboardAdquisitons" element={<Dashboard/>} />
+              
+              <Route path='/Acquisitions'>
+                <Route index element={<AcquisitionsDashboard />} />
+              </Route>
             </Route>
           </Route>
         </Routes>
