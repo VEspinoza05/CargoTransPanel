@@ -15,6 +15,7 @@ import Purchases from './pages/Acquisitions/Purchases';
 import EmployeesManagement from './pages/HumanResources/EmployeesManagement';
 import AccountsPage from './pages/Financial/AccountsPage';
 import SuppliersManagement from './pages/Acquisitions/suppliersManagement';
+import FleetManagementPage from './pages/Operations/FleetManagementPage';
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
 
               <Route path='/Financial'>
                 <Route path='Accounts' element={<AccountsPage />} />
+              </Route>
+
+              <Route path='/Operations'>
+                <Route path='FleetManagement' element={<FleetManagementPage />} />
               </Route>
             </Route>
           </Route>
