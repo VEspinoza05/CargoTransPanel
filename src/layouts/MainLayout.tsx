@@ -45,6 +45,7 @@ export default function MainLayout() {
     { name: "Inicio", href:"/" },
     { name: "Dashboard Compras", href:"/Acquisitions"},
     { name: "Compras", href:"/Acquisitions/Purchases"},
+    { name: "Gestión Proveedores", href:"/Acquisitions/SuppliersManagement"},
   ]
 
   const financialDirectorLinks = [
