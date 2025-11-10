@@ -58,6 +58,7 @@ export default function MainLayout() {
 
   const CEOLinks = [
     { name: "Inicio", href:"/" },
+    { name: "Dashboard", href:"/CEO/Dashboard" },
   ]
 
   const shiftSupervisorLinks = [
