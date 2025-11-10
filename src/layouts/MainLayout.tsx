@@ -28,6 +28,7 @@ export default function MainLayout() {
 
   const branchManagerLinks = [
     { name: "Inicio", href:"/" },
+    { name: "Clientes", href:"/BranchManaging/ClientsManagement" },
   ]
 
   const humanResourcesDirectorLinks = [
