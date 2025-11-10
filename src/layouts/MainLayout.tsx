@@ -28,9 +28,6 @@ export default function MainLayout() {
     { name: "Inicio", href:"/" },
     { name: "Envios", href:"/shipments" },
     { name: "Inicios de sesion", href:"/LoginLog"},
-    { name: "Dashboard Compras", href:"/Acquisitions"},
-    { name: "Compras", href:"/Acquisitions/Purchases"},
-    { name: "Gestion de empleados", href:"/HumanResources/EmployeesManagement"},
   ]
 
   const branchManagerLinks = [
@@ -39,8 +36,37 @@ export default function MainLayout() {
     { name: "Entrantes", href:"/Incoming"}
   ]
 
-  const navLinks = (role === "Administrador") ? adminLinks : 
-    (role === "Encargado") ? branchManagerLinks : [];
+  const humanResourcesDirectorLinks = [
+    { name: "Inicio", href:"/" },
+    { name: "Gestion de empleados", href:"/HumanResources/EmployeesManagement"},
+  ]
+
+  const purchasesDirectorLinks = [
+    { name: "Inicio", href:"/" },
+    { name: "Dashboard Compras", href:"/Acquisitions"},
+    { name: "Compras", href:"/Acquisitions/Purchases"},
+  ]
+
+  const getLinks = (role: string | null) => {
+    switch (role) {
+      case "Administrador":
+        return adminLinks;
+        break;
+      case "Encargado":
+        return branchManagerLinks;
+        break;
+      case "Director de RR.HH":
+        return humanResourcesDirectorLinks;
+        break;
+      case "Director de compras":
+        return purchasesDirectorLinks;
+        break;
+      default:
+        return [];
+    }
+  }
+
+  const navLinks = getLinks(role);
 
   if (loading) return <p>Cargando...</p>;
 
