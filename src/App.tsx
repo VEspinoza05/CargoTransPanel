@@ -16,6 +16,7 @@ import FleetManagementPage from './pages/Operations/FleetManagementPage';
 import ShipmentsManagementPage from './pages/Operations/ShipmentsManagementPage';
 import InternalRequestsPage from './pages/HumanResources/InternalRequestsPage';
 import ClientsManagementPage from './pages/BranchManagement/ClientsManagementPage';
+import BranchAttendancePage from './pages/BranchManagement/BranchAttendancePage';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
 
               <Route path='/BranchManaging'>
                 <Route path='ClientsManagement' element={<ClientsManagementPage />} />
+                <Route path='BranchAttendance' element={<BranchAttendancePage />} />
               </Route>
             </Route>
           </Route>
