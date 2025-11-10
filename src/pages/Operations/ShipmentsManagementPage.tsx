@@ -1,8 +1,8 @@
-import { DataTable } from "../components/DataTable";
-import { ColumnsShipment } from "../components/ColumnsShipment";
-import type { IShipmentModel } from "../models/Shipment";
+import { DataTable } from "@/components/DataTable"
+import { ColumnsShipment } from "@/components/Columns/ColumnsShipments";
+import type { IShipmentModel } from "@/models/Shipment";
 import { useEffect, useState } from "react";
-import { getShipments } from "../services/ShipmentService";
+import { getShipments } from "@/services/ShipmentService";
 
 export default function ShipmentsPage() {
   const [shipments, setShipments] = useState<IShipmentModel[]>([]);

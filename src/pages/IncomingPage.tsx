@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { IShipmentModel } from "../models/Shipment";
-import { ColumnsShipment } from "../components/ColumnsShipment";
+import { ColumnsShipment } from "@/components/Columns/ColumnsShipments";
 import { DataTable } from "../components/DataTable";
 import { getShipments, updateShipmentState } from "../services/ShipmentService";
 import { Button } from "@/components/ui/button";

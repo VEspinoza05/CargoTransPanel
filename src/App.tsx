@@ -5,7 +5,6 @@ import MainLayout from './layouts/MainLayout';
 import LoginPage from './pages/LoginPage';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
-import ShipmentsPage from './pages/ShipmentsPage';
 import HomePage from './pages/HomePage';
 import OutgoingPage from './pages/OutgoingPage';
 import IncomingPage from './pages/IncomingPage';
@@ -16,6 +15,7 @@ import EmployeesManagement from './pages/HumanResources/EmployeesManagement';
 import AccountsPage from './pages/Financial/AccountsPage';
 import SuppliersManagement from './pages/Acquisitions/suppliersManagement';
 import FleetManagementPage from './pages/Operations/FleetManagementPage';
+import ShipmentsManagementPage from './pages/Operations/ShipmentsManagementPage';
 
 function App() {
   return (
@@ -31,7 +31,6 @@ function App() {
           <Route element={<PrivateRoute/>}>
             <Route element={<MainLayout/>}>
               <Route path="/" element={<HomePage/>} />
-              <Route path="/shipments" element={<ShipmentsPage />} />
               <Route path="/Outgoing" element={<OutgoingPage />} />
               <Route path="/Incoming" element={<IncomingPage />} />
               <Route path="/LoginLog" element={<LoginLogPage />} />
@@ -52,6 +51,7 @@ function App() {
 
               <Route path='/Operations'>
                 <Route path='FleetManagement' element={<FleetManagementPage />} />
+                <Route path='ShipmentsManagement' element={<ShipmentsManagementPage />} />
               </Route>
             </Route>
           </Route>

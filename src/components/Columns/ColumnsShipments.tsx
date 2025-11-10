@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import type { IShipmentModel } from "../models/Shipment"
+import type { IShipmentModel } from "@/models/Shipment"
 import { formatInTimeZone } from 'date-fns-tz';
 
 export const ColumnsShipment: ColumnDef<IShipmentModel>[] = [
