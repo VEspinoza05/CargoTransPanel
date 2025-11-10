@@ -47,12 +47,28 @@ export default function MainLayout() {
     { name: "Compras", href:"/Acquisitions/Purchases"},
   ]
 
+  const financialDirectorLinks = [
+    { name: "Inicio", href:"/" },
+  ]
+
+  const oparetiveDirectorLinks = [
+    { name: "Inicio", href:"/" },
+  ]
+
+  const CEOLinks = [
+    { name: "Inicio", href:"/" },
+  ]
+
+  const shiftSupervisorLinks = [
+    { name: "Inicio", href:"/" },
+  ]
+
   const getLinks = (role: string | null) => {
     switch (role) {
       case "Administrador":
         return adminLinks;
         break;
-      case "Encargado":
+      case "Gerente de Sucursal":
         return branchManagerLinks;
         break;
       case "Director de RR.HH":
@@ -60,6 +76,18 @@ export default function MainLayout() {
         break;
       case "Director de compras":
         return purchasesDirectorLinks;
+        break;
+      case "Director Financiero":
+        return financialDirectorLinks;
+        break;
+      case "Director Operativo":
+        return oparetiveDirectorLinks;
+        break;
+      case "CEO":
+        return CEOLinks;
+        break;
+      case "Encargado de Turno":
+        return shiftSupervisorLinks;
         break;
       default:
         return [];
