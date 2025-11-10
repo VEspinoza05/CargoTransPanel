@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 import { Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -19,6 +19,8 @@ import cargotransLogo from "../assets/cargotransLogo.jpg"
 export default function MainLayout() {
   const auth = getAuth();
   const { user, role, branchCity, loading } = useAuth();
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const handleLogout = () => {
     signOut(auth)
@@ -140,7 +142,10 @@ export default function MainLayout() {
         </SidebarProvider>
       </aside>
       <main className="flex flex-col w-full p-4 overflow-auto">
-        <Outlet />
+        {
+          navLinks.find((route) => route.href === currentPath) ? <Outlet /> :
+            <h1 className="font-bold text-4xl mb-6">Error: Acceso no autorizado</h1>
+        }
       </main>
     </div>
   );
