@@ -6,8 +6,6 @@ import LoginPage from './pages/LoginPage';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import HomePage from './pages/HomePage';
-import OutgoingPage from './pages/OutgoingPage';
-import IncomingPage from './pages/IncomingPage';
 import LoginLogPage from './pages/LoginLogPage';
 import AcquisitionsDashboard from './pages/Acquisitions/AcquisitionsDashboard';
 import Purchases from './pages/Acquisitions/Purchases';
@@ -16,6 +14,7 @@ import AccountsPage from './pages/Financial/AccountsPage';
 import SuppliersManagement from './pages/Acquisitions/suppliersManagement';
 import FleetManagementPage from './pages/Operations/FleetManagementPage';
 import ShipmentsManagementPage from './pages/Operations/ShipmentsManagementPage';
+import InternalRequestsPage from './pages/HumanResources/InternalRequestsPage';
 
 function App() {
   return (
@@ -31,8 +30,6 @@ function App() {
           <Route element={<PrivateRoute/>}>
             <Route element={<MainLayout/>}>
               <Route path="/" element={<HomePage/>} />
-              <Route path="/Outgoing" element={<OutgoingPage />} />
-              <Route path="/Incoming" element={<IncomingPage />} />
               <Route path="/LoginLog" element={<LoginLogPage />} />
               
               <Route path='/Acquisitions'>
@@ -43,6 +40,7 @@ function App() {
 
               <Route path='/HumanResources'>
                 <Route path='EmployeesManagement' element={<EmployeesManagement />} />
+                <Route path='InternalRequests' element={<InternalRequestsPage />} />
               </Route>
 
               <Route path='/Financial'>

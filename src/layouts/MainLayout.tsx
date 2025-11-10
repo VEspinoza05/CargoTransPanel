@@ -26,21 +26,14 @@ export default function MainLayout() {
     signOut(auth)
   }
 
-  const adminLinks = [
-    { name: "Inicio", href:"/" },
-    { name: "Envios", href:"/shipments" },
-    { name: "Inicios de sesion", href:"/LoginLog"},
-  ]
-
   const branchManagerLinks = [
     { name: "Inicio", href:"/" },
-    { name: "Salientes", href:"/Outgoing" },
-    { name: "Entrantes", href:"/Incoming"}
   ]
 
   const humanResourcesDirectorLinks = [
     { name: "Inicio", href:"/" },
     { name: "Gestion de empleados", href:"/HumanResources/EmployeesManagement"},
+    { name: "Solicitudes internas", href:"/HumanResources/InternalRequests"},
   ]
 
   const purchasesDirectorLinks = [
@@ -71,9 +64,6 @@ export default function MainLayout() {
 
   const getLinks = (role: string | null) => {
     switch (role) {
-      case "Administrador":
-        return adminLinks;
-        break;
       case "Gerente de Sucursal":
         return branchManagerLinks;
         break;
