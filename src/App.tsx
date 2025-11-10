@@ -13,6 +13,7 @@ import LoginLogPage from './pages/LoginLogPage';
 import AcquisitionsDashboard from './pages/Acquisitions/AcquisitionsDashboard';
 import Purchases from './pages/Acquisitions/Purchases';
 import EmployeesManagement from './pages/HumanResources/EmployeesManagement';
+import AccountsPage from './pages/Financial/AccountsPage';
 
 function App() {
   return (
@@ -40,6 +41,10 @@ function App() {
 
               <Route path='/HumanResources'>
                 <Route path='EmployeesManagement' element={<EmployeesManagement />} />
+              </Route>
+
+              <Route path='/Financial'>
+                <Route path='Accounts' element={<AccountsPage />} />
               </Route>
             </Route>
           </Route>
