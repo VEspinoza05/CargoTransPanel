@@ -50,6 +50,7 @@ export default function MainLayout() {
   const financialDirectorLinks = [
     { name: "Inicio", href:"/" },
     { name: "Cuentas pendientes / por pagar", href:"/Financial/Accounts" },
+    { name: "Solicitudes de compra", href:"/Financial/PurchaseRequests" },
   ]
 
   const oparetiveDirectorLinks = [

@@ -21,6 +21,7 @@ import DashboardCEOGeneralPage from './pages/CEO/DashboardCEOGeneralPage';
 import PackageReceptionPage from './pages/ShiftSupervisor/PackageReceptionPage';
 import FleetMapPage from './pages/Operations/FleetMapPage';
 import ShipmentSending from './pages/BranchManagement/ShipmentSending';
+import PurchaseRequestsPage from './pages/Financial/PurchaseRequestsPage';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
 
               <Route path='/Financial'>
                 <Route path='Accounts' element={<AccountsPage />} />
+                <Route path='PurchaseRequests' element={<PurchaseRequestsPage />} />
               </Route>
 
               <Route path='/Operations'>
