@@ -31,6 +31,7 @@ export default function MainLayout() {
     { name: "Inicio", href:"/" },
     { name: "Clientes", href:"/BranchManaging/ClientsManagement" },
     { name: "Asistencia", href:"/BranchManaging/BranchAttendance" },
+    { name: "Envíos", href:"/BranchManaging/ShipmentSending" },
   ]
 
   const humanResourcesDirectorLinks = [
