@@ -18,6 +18,7 @@ import InternalRequestsPage from './pages/HumanResources/InternalRequestsPage';
 import ClientsManagementPage from './pages/BranchManagement/ClientsManagementPage';
 import BranchAttendancePage from './pages/BranchManagement/BranchAttendancePage';
 import DashboardCEOGeneralPage from './pages/CEO/DashboardCEOGeneralPage';
+import PackageReceptionPage from './pages/ShiftSupervisor/PackageReceptionPage';
 
 function App() {
   return (
@@ -62,6 +63,10 @@ function App() {
 
               <Route path='/CEO'>
                 <Route path='Dashboard' element={<DashboardCEOGeneralPage />} />
+              </Route>
+
+              <Route path='/ShiftSupervisor'>
+                <Route path='PackageReception' element={<PackageReceptionPage />} />
               </Route>
             </Route>
           </Route>

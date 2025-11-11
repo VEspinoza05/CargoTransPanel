@@ -15,6 +15,7 @@ import { getAuth, signOut  } from "firebase/auth";
 import { Button } from "../components/ui/button";
 import { useAuth } from "../contexts/AuthContext";
 import cargotransLogo from "../assets/cargotransLogo.jpg"
+import { Toaster } from "sonner";
 
 export default function MainLayout() {
   const auth = getAuth();
@@ -63,6 +64,7 @@ export default function MainLayout() {
 
   const shiftSupervisorLinks = [
     { name: "Inicio", href:"/" },
+    { name: "Recepcion de paquetes", href:"/ShiftSupervisor/PackageReception" },
   ]
 
   const getLinks = (role: string | null) => {
@@ -101,6 +103,7 @@ export default function MainLayout() {
 
   return (
     <div className="w-screen h-screen flex">
+      <Toaster />
       <aside>
         <SidebarProvider>
           <Sidebar>
