@@ -47,7 +47,7 @@ export const columns: ColumnDef<PackageData>[] = [
   {
     id: "actions",
     header: "Acciones",
-    cell: ({ row }) => (
+    cell: () => (
       <Button size="sm" variant="outline">
         Ver detalle
       </Button>

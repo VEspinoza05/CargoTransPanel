@@ -116,9 +116,19 @@ export default function AcquisitionsDashboard() {
                     outerRadius={100}
                     label
                   >
-                    {pieData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
+                    {
+                      (function(arr){
+                        const elements = []
+
+                        for(let i = 0; i < arr.length; i++ ) {
+                          elements.push( 
+                            <Cell key={`cell-${i}`} fill={COLORS[i % COLORS.length]} />
+                          )
+                        }
+
+                        return elements;
+                      })(pieData)
+                    }
                   </Pie>
                   <Tooltip />
                 </PieChart>
