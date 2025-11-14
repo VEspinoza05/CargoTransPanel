@@ -2,9 +2,41 @@ import { Button } from "@/components/ui/button"
 import { PlusCircle } from "lucide-react"
 import { DataTable } from "@/components/DataTable"
 import { columnsFleet } from "@/components/Columns/ColumnsFleet"
-import type { IFleetModel } from "@/models/FleetModel"
+import type { IVehicleModel } from "@/models/VehicleModel"
+import { useEffect, useState } from "react"
+import { getVehicles } from "@/services/VehicleService"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
 
 export default function FleetManagementPage() {
+  const [vehicles, setVehicles] = useState<IVehicleModel[]>([]);
+  const [loadingVehicles, setLoadingVehicles] = useState(true);
+
+  useEffect(() => {
+    const fetchLoginLogs = async () => {
+      try {
+        const data = await getVehicles();
+        setVehicles(data);
+      } catch (error) {
+        console.error("Error al cargar los datos de login:", error);
+      } finally {
+        setLoadingVehicles(false);
+      }
+    }
+
+    fetchLoginLogs()
+  }, [])
+
   return (
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
@@ -15,39 +47,13 @@ export default function FleetManagementPage() {
         </Button>
       </div>
 
+    {loadingVehicles ?
+      <p>Cargando datos...</p> :
       <div className="bg-white rounded-2xl shadow p-4">
-        <DataTable columns={columnsFleet} data={dataFleet} />
+        <DataTable columns={columnsFleet} data={vehicles} />
       </div>
+    }
     </div>
   )
 }
 
-const dataFleet : Array<IFleetModel> = [
-  {
-    fleetId: "VH-001",
-    vehicleLicensePlate: "M123456",
-    type: "Camión liviano",
-    capacity: "2 toneladas",
-    status: "En ruta",
-    driver: "Carlos López",
-    nextMaintenance: new Date("2025-10-31T08:30:00Z"),
-  },
-  {
-    fleetId: "VH-002",
-    vehicleLicensePlate: "M789123",
-    type: "Furgoneta",
-    capacity: "1 tonelada",
-    status: "Disponible",
-    driver: "—",
-    nextMaintenance: new Date("2025-10-31T08:30:00Z"),
-  },
-  {
-    fleetId: "VH-003",
-    vehicleLicensePlate: "M456789",
-    type: "Camión pesado",
-    capacity: "5 toneladas",
-    status: "En Mantenimiento",
-    driver: "—",
-    nextMaintenance: new Date("2025-10-31T08:30:00Z"),
-  },
-]
