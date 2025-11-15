@@ -69,6 +69,11 @@ export default function FleetManagementPage() {
   const handleDelete = async () => {
     const response = await deleteVehicle(vehicleToDeleteId);
     if(response === "Vehicle deleted successfully"){
+      setVehicles((prev) => 
+        prev.filter((vehicle) => 
+          vehicleToDeleteId !== vehicle.id)
+      )
+      
       toast("Resultado",
         {description: `El vehiculo ${vehicleToDeleteId} fue eliminado exitosamente.`,}
       ); 
@@ -294,7 +299,7 @@ export default function FleetManagementPage() {
             </div>
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="outline">Cancelar</Button>
+                <Button  variant="outline">Cancelar</Button>
               </DialogClose>
               <Button onClick={handleUpdate} type="submit">Guardar</Button>
             </DialogFooter>
@@ -314,9 +319,10 @@ export default function FleetManagementPage() {
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancelar</AlertDialogCancel>
                 <AlertDialogAction
+                  className="bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60"
                   onClick={handleDelete}
                 >
-                  Continuar
+                  Eliminar
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
