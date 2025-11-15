@@ -93,6 +93,10 @@ export default function FleetManagementPage() {
       toast("Resultado",
         {description: `El vehiculo fue creado exitosamente.`,}
       ); 
+
+      setVehicles((prev) => 
+        [...prev, result]
+      )
     }
     catch (error) {
       console.error("Error:", error);
@@ -110,6 +114,16 @@ export default function FleetManagementPage() {
       toast("Resultado",
         {description: `El vehiculo ${selectedVehicle.id} fue actualizado exitosamente.`,}
       ); 
+
+      console.log(JSON.stringify(selectedVehicle))
+
+      setVehicles((prev) => 
+        prev.map((vehicle) => 
+          selectedVehicle.id === vehicle.id
+          ? { ...selectedVehicle }
+          : vehicle
+        )
+      )
     }
     else {
       toast("Error",
@@ -118,7 +132,7 @@ export default function FleetManagementPage() {
     }
 
     setOpenEditDialog(false)
-    setVehicleToDeleteId(null)
+    setSelectedVehicle(null)
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -156,6 +170,7 @@ export default function FleetManagementPage() {
                 capacity: row.getValue("capacity"),
                 status: row.getValue("status"),
                 driverId: row.getValue("driverId"),
+                enterDate: row.getValue("enterDate"),
                 brand: row.getValue("brand"),
                 model: row.getValue("model"),
                 serial: row.getValue("serial"),
