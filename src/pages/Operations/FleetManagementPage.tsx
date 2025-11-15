@@ -31,16 +31,19 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { DataTable } from "@/components/DataTable"
 import { PlusCircle } from "lucide-react"
+import { Combobox, type listComboboxElements } from "@/components/ui/combobox"
+import { getEmployees } from "@/services/EmployeeService"
 
 export default function FleetManagementPage() {
   const [vehicles, setVehicles] = useState<IVehicleModel[]>([]);
+  const [drivers, setDrivers] = useState<listComboboxElements[]>([]);
   const [loadingVehicles, setLoadingVehicles] = useState(true);
   const [newVehicle, setNewVehicle] = useState<any>({
     vehicleLicensePlate: "",
     type: "",
     capacity: "",
     status: "",
-    driverId: null,
+    driverId: "ninguno",
     brand: "",
     model: "",
     serial: ""
@@ -64,6 +67,27 @@ export default function FleetManagementPage() {
     }
 
     fetchLoginLogs()
+  }, [])
+
+  useEffect(() => {
+    const fetchDrivers = async () => {
+      try {
+        const data = await getEmployees();
+        const driverList = data.map(employee => {
+          return {
+            value: String(employee.id),
+            label: employee.firstName + employee.lastName
+          }
+        })
+
+        setDrivers(driverList)
+
+      } catch (error) {
+        console.error("Error al cargar los datos de login:", error);
+      }
+    }
+
+    fetchDrivers()
   }, [])
 
   const handleDelete = async () => {
@@ -142,6 +166,17 @@ export default function FleetManagementPage() {
       [name]: value,
     }));
   }
+
+  const handleInputComboboxChange = (
+    event: { target: { name?: string; value: string } }
+  ) => {
+    const { name, value } = event.target;
+    console.log("Handler:" + value)
+    setNewVehicle((previousVehicleData: any) => ({
+      ...previousVehicleData,
+      [name!]: value,
+    }));
+  };
 
   const handleInputUpdateChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -243,9 +278,21 @@ export default function FleetManagementPage() {
               <Input onChange={handleInputChange} id="status-2" name="status"/>
             </div>
             <div className="grid gap-3">
-              {/* TODO: Add a menu to fetch users */}
-              <Label htmlFor="driverId-2">Id empleado</Label>
-              <Input onChange={handleInputChange} id="driverId-2" name="driverId"/>
+              <Label htmlFor="driverId-1">Conductor</Label>
+              <Combobox
+                dataList={[
+                  {
+                    value: "ninguno",
+                    label: "Ninguno",
+                  },
+                  ...drivers
+                ]}
+                externalPlaceholder="Seleccionar conductor"
+                searchPlaceholder="Buscar conductor"
+                defaultValue="ninguno"
+                onChange={handleInputComboboxChange}  
+                name="driverId"
+              />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="brand-2">Marca</Label>

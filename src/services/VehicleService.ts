@@ -12,8 +12,16 @@ export const deleteVehicle = async (id: number): Promise<string> => {
 };
 
 export const createVehicle =  async (newShipment: any): Promise<any> => {
+  console.log("CREATE VEHICLE PAYLOAD" + JSON.stringify(newShipment))
   const response = await axios.post("/Vehicle", {
-    ...newShipment
+    vehicleLicensePlate: newShipment.vehicleLicensePlate,
+    type: newShipment.type,
+    capacity: newShipment.capacity,
+    status: newShipment.status,
+    driverId: newShipment.driverId === "ninguno" ? null : Number(newShipment.driverId),
+    brand: newShipment.brand,
+    model: newShipment.model,
+    serial: newShipment.serial,
   });
   return response.data;
 };
@@ -24,7 +32,7 @@ export const updateVehicle =  async (id: number, updatedShipment: any): Promise<
     type: updatedShipment.type,
     capacity: updatedShipment.capacity,
     status: updatedShipment.status,
-    driverId: updatedShipment.driverId,
+    driverId: updatedShipment.driverId === "ninguno" ? null : Number(updatedShipment.driverId),
     brand: updatedShipment.brand,
     model: updatedShipment.model,
     serial: updatedShipment.serial,

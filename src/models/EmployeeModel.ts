@@ -1,9 +1,13 @@
 export interface IEmployeeModel {
-  employeeId: string,
-  fullName: string,
-  title: string,
-  department: string,
-  startDate: Date,
-  status: string,
-  contractType: string,
+  id: number
+  firstName: string
+  lastName: string
+  roleId: number
+  roleName: string
+  startDate: Date
+  status: string
+  phone: string
+  contractType: string
+  shift: string
+  email: string
 }
