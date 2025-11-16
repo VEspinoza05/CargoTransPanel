@@ -23,7 +23,10 @@ export const createSupplier =  async (newSupplier: any): Promise<any> => {
 
 export const updateSupplier =  async (id: number, updatedSupplier: any): Promise<any> => {
   const response = await axios.put(`/Supplier/${id}`, {
-    // TODO: Add update payload
+    name: updatedSupplier.name,
+    email: updatedSupplier.email,
+    address: updatedSupplier.address,
+    phone: updatedSupplier.phone,
   });
   return response.data;
 };

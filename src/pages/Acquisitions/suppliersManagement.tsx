@@ -118,6 +118,7 @@ export default function FleetManagementPage() {
 
   const handleUpdate = async () => {
     const response = await updateSupplier(supplierToUpdate.id, supplierToUpdate);
+    console.log("REPOSNSE UPDATE: " + response)
     if(response === "Supplier updated successfully"){
       toast("Resultado",
         {description: `El vehiculo ${supplierToUpdate.id} fue actualizado exitosamente.`,}
