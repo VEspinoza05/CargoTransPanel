@@ -84,7 +84,7 @@ export default function MainLayout() {
       case "Director de RR.HH":
         return humanResourcesDirectorLinks;
         break;
-      case "Director de compras":
+      case "Director De Compras":
         return purchasesDirectorLinks;
         break;
       case "Director Financiero":

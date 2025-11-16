@@ -1,5 +1,5 @@
 export interface ISupplierModel {
-  supplierId: string,
+  id: number,
   name: string,
   email: string,
   address: string,

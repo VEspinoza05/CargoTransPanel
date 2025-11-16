@@ -1,9 +1,9 @@
-import type { ISupplierModel } from "@/models/supplierModel";
+import type { ISupplierModel } from "@/models/SupplierModel";
 import type { ColumnDef } from "@tanstack/react-table"
 
 export const ColumnsSuppliers: ColumnDef<ISupplierModel>[] = [
   {
-    accessorKey: "supplierId",
+    accessorKey: "id",
     header: "ID Proveedor",
   },
   {

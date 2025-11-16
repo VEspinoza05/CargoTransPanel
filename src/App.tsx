@@ -11,7 +11,6 @@ import AcquisitionsDashboard from './pages/Acquisitions/AcquisitionsDashboard';
 import Purchases from './pages/Acquisitions/Purchases';
 import EmployeesManagement from './pages/HumanResources/EmployeesManagement';
 import AccountsPage from './pages/Financial/AccountsPage';
-import SuppliersManagement from './pages/Acquisitions/suppliersManagement';
 import FleetManagementPage from './pages/Operations/FleetManagementPage';
 import ShipmentsManagementPage from './pages/Operations/ShipmentsManagementPage';
 import InternalRequestsPage from './pages/HumanResources/InternalRequestsPage';
@@ -22,6 +21,7 @@ import PackageReceptionPage from './pages/ShiftSupervisor/PackageReceptionPage';
 import FleetMapPage from './pages/Operations/FleetMapPage';
 import ShipmentSending from './pages/BranchManagement/ShipmentSending';
 import PurchaseRequestsPage from './pages/Financial/PurchaseRequestsPage';
+import SuppliersManagement from './pages/Acquisitions/SuppliersManagement';
 
 function App() {
   return (
