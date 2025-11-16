@@ -12,7 +12,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
 import {
   AlertDialog,
@@ -178,6 +177,17 @@ export default function FleetManagementPage() {
     }));
   };
 
+  const handleInputComboboxUpdateChange = (
+    event: { target: { name?: string; value: string } }
+  ) => {
+    const { name, value } = event.target;
+    console.log("Handler:" + value)
+    setSelectedVehicle((previousVehicleData: any) => ({
+      ...previousVehicleData,
+      [name!]: value,
+    }));
+  };
+
   const handleInputUpdateChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setSelectedVehicle((previousVehicleData : any) => ({
@@ -204,12 +214,13 @@ export default function FleetManagementPage() {
                 type: row.getValue("type"),
                 capacity: row.getValue("capacity"),
                 status: row.getValue("status"),
-                driverId: row.getValue("driverId"),
+                driverId: String(row.getValue("driverId")),
                 enterDate: row.getValue("enterDate"),
                 brand: row.getValue("brand"),
                 model: row.getValue("model"),
                 serial: row.getValue("serial"),
               })
+              console.log(JSON.stringify(selectedVehicle))
               setOpenEditDialog(true)
             }}
           >
@@ -342,9 +353,21 @@ export default function FleetManagementPage() {
                 <Input onChange={handleInputUpdateChange} id="status-1" name="status" value={selectedVehicle?.status || ""}/>
               </div>
               <div className="grid gap-3">
-                {/* TODO: Add a menu to fetch users */}
                 <Label htmlFor="driverId-1">Id empleado</Label>
-                <Input onChange={handleInputUpdateChange} id="driverId-1" name="driverId" value={selectedVehicle?.driverId || ""}/>
+                <Combobox
+                  dataList={[
+                    {
+                      value: "ninguno",
+                      label: "Ninguno",
+                    },
+                    ...drivers
+                  ]}
+                  externalPlaceholder="Seleccionar conductor"
+                  searchPlaceholder="Buscar conductor"
+                  defaultValue={selectedVehicle?.driverId || "ninguno"}
+                  onChange={handleInputComboboxUpdateChange}  
+                  name="driverId"
+                />
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="brand-1">Marca</Label>
