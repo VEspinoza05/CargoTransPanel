@@ -11,20 +11,26 @@ import { Sidebar,
   SidebarMenuItem, 
   SidebarProvider
 } from "../components/ui/sidebar";
-import { getAuth, signOut  } from "firebase/auth";
 import { Button } from "../components/ui/button";
-import { useAuth } from "../contexts/AuthContext";
 import cargotransLogo from "../assets/cargotransLogo.jpg"
 import { Toaster } from "sonner";
+import { useAuth } from "@/contexts/AuthContext";
+import { jwtDecode } from 'jwt-decode';
+
+const decodeToken = (token: string | null) => {
+  const decodedToken = jwtDecode(token ?? "");
+  const tokenString = JSON.stringify(decodedToken)
+  const parsedToken = JSON.parse(tokenString)
+  return parsedToken;
+}
 
 export default function MainLayout() {
-  const auth = getAuth();
-  const { user, role, branchCity, loading } = useAuth();
-  const location = useLocation();
-  const currentPath = location.pathname;
+  const { token, loading, logout } = useAuth();
 
+  const tokenClaims = decodeToken(token)
+  
   const handleLogout = () => {
-    signOut(auth)
+    logout();
   }
 
   const branchManagerLinks = [
@@ -98,11 +104,11 @@ export default function MainLayout() {
     }
   }
 
-  const navLinks = getLinks(role);
+  const navLinks = getLinks(tokenClaims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
 
   if (loading) return <p>Cargando...</p>;
 
-  if (!user) return <p>No estás autenticado</p>;
+  if (!token) return <p>No estás autenticado</p>;
 
   return (
     <div className="w-screen h-screen flex">
@@ -112,7 +118,7 @@ export default function MainLayout() {
           <Sidebar>
             <SidebarHeader>
               <img src={cargotransLogo} />
-              <h2 className="font-bold text-lg">{role === "Administrador" ? "Casa matriz" : `Ciudad: ${branchCity}`}</h2>
+              
             </SidebarHeader>
             <SidebarContent>
               <SidebarGroup>
@@ -132,9 +138,10 @@ export default function MainLayout() {
             </SidebarContent>
             <SidebarFooter>
               <h3 className="font-bold text-base">Datos de usuario</h3>
-              <p>{user?.displayName}</p>
-              <p>{user?.email}</p>
-              <p>{role}</p>
+              {/* TODO: Add surname  */}
+              <p>{tokenClaims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]}</p>
+              <p>{tokenClaims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}</p>
+              <p>{tokenClaims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]}</p>
               <Button onClick={handleLogout}>
                 Cerrar sesion
               </Button>
@@ -143,10 +150,7 @@ export default function MainLayout() {
         </SidebarProvider>
       </aside>
       <main className="flex flex-col w-full p-4 overflow-auto">
-        {
-          navLinks.find((route) => route.href === currentPath) ? <Outlet /> :
-            <h1 className="font-bold text-4xl mb-6">Error: Acceso no autorizado</h1>
-        }
+        <Outlet /> 
       </main>
     </div>
   );

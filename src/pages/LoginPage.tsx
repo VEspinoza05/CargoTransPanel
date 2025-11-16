@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { login } from "../services/AuthService";
-import { createLoginLog } from "@/services/LoginLogService";
+import { useAuth } from "@/contexts/AuthContext";
 import cargotransLogo from "../assets/cargotransLogo.jpg"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(email, password);
-      createLoginLog();
+      await auth.login(email, password);
       navigate("/");
     } catch (error: any) {
       alert(error.message);
+      console.log(error)
     }
   };
 

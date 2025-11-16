@@ -1,54 +1,51 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, getAuth } from "firebase/auth";
-import type { User } from "firebase/auth";
+import { login as apiLogin } from "../services/AuthService";
 
 interface AuthContextType {
-  user: User | null;
+  token: string | null;
   role: string | null;
-  branchCity: string | null;
   loading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
-  user: null,
+  token: null,
   role: null,
-  branchCity: null,
   loading: true,
+  login: async () => {},
+  logout: () => {},
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [role, setRole] = useState<string | null>(null);
-  const [branchCity, setBranchCity] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState<string | null>(localStorage.getItem("apiToken"));
+  const [role, setRole] = useState<string | null>(localStorage.getItem("role"));
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const auth = getAuth();
+  const login = async (email: string, password: string) => {
+    setLoading(true);
+    const data = await apiLogin(email, password);
+    setToken(data.token);
+    setRole(data.role);
 
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setUser(firebaseUser);
+    localStorage.setItem("apiToken", data.token);
+    localStorage.setItem("role", data.role);
 
-      if(firebaseUser) {
-        const tokenResult = await firebaseUser.getIdTokenResult(true);
-        setRole(String(tokenResult.claims.role) ?? null);
-        setBranchCity(String(tokenResult.claims.branchCity) ?? null);
-      } else {
-        setRole(null)
-        setBranchCity(null)
-      }
+    setLoading(false);
+  };
 
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const logout = () => {
+    setToken(null);
+    setRole(null);
+    localStorage.removeItem("apiToken");
+    localStorage.removeItem("role");
+  };
 
   return (
-    <AuthContext.Provider value={{ user, role, loading, branchCity }}>
-      {!loading && children}
+    <AuthContext.Provider value={{ token, role, loading, login, logout }}>
+      {children}
     </AuthContext.Provider>
   );
 };
 
-// Hook personalizado
-export const useAuth = (): AuthContextType => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext);
