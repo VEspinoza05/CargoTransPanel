@@ -7,10 +7,11 @@ import { PlusCircle } from "lucide-react"
 import type { IPurchaseModel } from "@/models/PurchaseModel";
 import { CreatePurhcaseRequestDialog } from "@/components/Dialogs/CreatePurhcaseRequestDialog";
 import { getSuppliers } from "@/services/SupplierService";
-import { createPurchase, getPurchases } from "@/services/PurchaseService";
+import { createPurchase, deletePurchase, getPurchases } from "@/services/PurchaseService";
 import { useAuth } from "@/contexts/AuthContext";
 import { decodeToken } from "@/layouts/MainLayout";
 import type { listComboboxElements } from "@/components/ui/combobox";
+import { DeleteAlert } from "@/components/Dialogs/DeleteAlert";
 
 interface newPurchaseRequest {
   supplierId: number,
@@ -28,6 +29,8 @@ export default function EmployeesManagementPage() {
   const [loadingPurchases, setLoadingPurchases] = useState(true);
   const [suppliers, setSuppliers] = useState<listComboboxElements[]>([]);
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
+  const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
+  const [purchaseToDeleteId, setPurchaseToDeleteId]= useState<any>(null);
 
   const { token } = useAuth();
   
@@ -69,8 +72,35 @@ export default function EmployeesManagementPage() {
     fetchSuppliers()
   }, [])
 
+  const handleDelete = async () => {
+    const response = await deletePurchase(purchaseToDeleteId);
+
+    if(response === "Purchase deleted successfully"){
+      setPurchases((prev) => 
+        prev.filter((purchase) => 
+          purchaseToDeleteId !== purchase.id)
+      )
+      
+      toast("Resultado",
+        {description: `El proveedor ${purchaseToDeleteId} fue eliminado exitosamente.`,}
+      ); 
+    }
+    else {
+      toast("Error",
+        {description: `Ha ocurrido un error`,}
+      ); 
+    }
+
+    setPurchaseToDeleteId(null)
+  }
+
   const handleCreateDialogOpen = (newOpenState: boolean) => {
     setOpenCreateDialog(newOpenState);
+  };
+
+  const handleOpenDeleteAlert = (newOpenState: boolean) => {
+    setOpenDeleteAlert(newOpenState);
+    setPurchaseToDeleteId(null)
   };
 
   const handleSubmit = async (payload: any) => {
@@ -114,7 +144,8 @@ export default function EmployeesManagementPage() {
           <Button
             variant={"destructive"}
             onClick={() => {
-              
+              setOpenDeleteAlert(true)
+              setPurchaseToDeleteId(row.getValue("id"))
             }}
           >
             Eliminar
@@ -123,6 +154,8 @@ export default function EmployeesManagementPage() {
       )
     },
   });
+
+  console.log(purchaseToDeleteId)
 
   return (
     <div className="p-6 space-y-6">
@@ -151,6 +184,12 @@ export default function EmployeesManagementPage() {
         onOpenChange={handleCreateDialogOpen}
         submitHandler={handleSubmit}
         comboBoxDataList={suppliers}
+      />
+
+      <DeleteAlert 
+        open={openDeleteAlert}
+        onOpenChange={handleOpenDeleteAlert}
+        submitHandler={handleDelete}
       />
     </div>
   )

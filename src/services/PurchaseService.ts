@@ -21,3 +21,8 @@ export const createPurchase =  async (newPurchase: any): Promise<any> => {
   });
   return response.data;
 };
+
+export const deletePurchase = async (id: number): Promise<string> => {
+  const response = await axios.delete(`/Purchase/${id}`)
+  return response.data;
+};
