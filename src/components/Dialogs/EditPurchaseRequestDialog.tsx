@@ -104,7 +104,7 @@ export function EditPurchaseRequestDialog({open, onOpenChange, submitHandler, co
               ]}
               externalPlaceholder="Seleccionar rol"
               searchPlaceholder="Buscar rol"
-              defaultValue={String(purchaseRequest?.supplierId)}
+              defaultValue={String(purchaseRequest?.supplierId?.toString())}
               onChange={handleInputComboboxChange}  
               name="supplierId"
             />

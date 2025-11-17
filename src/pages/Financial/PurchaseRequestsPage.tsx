@@ -13,6 +13,7 @@ import { decodeToken } from "@/layouts/MainLayout";
 import type { listComboboxElements } from "@/components/ui/combobox";
 import { DeleteAlert } from "@/components/Dialogs/DeleteAlert";
 import { EditPurchaseRequestDialog } from "@/components/Dialogs/EditPurchaseRequestDialog";
+import { RequestReviewDialog } from "@/components/Dialogs/RequestReviewDialog";
 
 interface newPurchaseRequest {
   supplierId: number,
@@ -34,6 +35,8 @@ export default function EmployeesManagementPage() {
   const [purchaseToDeleteId, setPurchaseToDeleteId]= useState<any>(null);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const [purchaseToUpdate, setPurchaseToUpdate]= useState<any>(null);
+  const [reviewData, setReviewData] = useState<any>(null);
+  const [openReviewDataAlert, setOpenReviewDataAlert] = useState(false);
 
   const { token } = useAuth();
   
@@ -163,6 +166,27 @@ const handleUpdate = async (payload: any) => {
     id:"Actions",
     header: "Accion",
     cell: ({row}) => {
+      if(row.getValue("status") === "Aprobada" || row.getValue("status") === "Rechazada") {
+        return (
+          <Button
+            
+            onClick={() => {
+              setReviewData({
+                purchaseRequestId: row.original.id,
+                revisionDate: row.original.revisionDate,
+                revisionDescription: row.original.revisionDescription,
+                status: row.original.status,
+              })
+
+              setOpenReviewDataAlert(true)
+            }}
+          >
+            Ver detalles de revisión
+          </Button>
+        )
+      }
+      
+
       return(
         <div className="flex gap-2">
           {/* Upadte Button*/}
@@ -242,6 +266,12 @@ const handleUpdate = async (payload: any) => {
         submitHandler={handleUpdate}
         comboBoxDataList={suppliers}
         purchaseToUpdate={purchaseToUpdate}
+      />
+
+      <RequestReviewDialog
+        open={openReviewDataAlert}
+        onOpenChange={setOpenReviewDataAlert}
+        reviewDataParam={reviewData}
       />
     </div>
   )
