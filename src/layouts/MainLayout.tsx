@@ -17,7 +17,7 @@ import { Toaster } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { jwtDecode } from 'jwt-decode';
 
-const decodeToken = (token: string | null) => {
+export const decodeToken = (token: string | null) => {
   const decodedToken = jwtDecode(token ?? "");
   const tokenString = JSON.stringify(decodedToken)
   const parsedToken = JSON.parse(tokenString)

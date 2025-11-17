@@ -1,16 +1,19 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { Button } from "@/components/ui/button"
 import type { IPurchaseModel } from "@/models/PurchaseModel"
 import { formatInTimeZone } from "date-fns-tz";
 
 export const ColumnsPurchasesRequests: ColumnDef<IPurchaseModel>[] = [
   {
-    accessorKey: "purchaseId",
+    accessorKey: "id",
     header: "ID Compra",
   },
   {
-    accessorKey: "supplier",
-    header: "Proveedor",
+    accessorKey: "supplierId",
+    header: "ID Proveedor",
+  },
+  {
+    accessorKey: "supplier.name",
+    header: "Nombre Proveedor",
   },
   {
     accessorKey: "requestDate",
@@ -57,23 +60,13 @@ export const ColumnsPurchasesRequests: ColumnDef<IPurchaseModel>[] = [
     cell: ({ row }) => {
       const status = String(row.getValue("status"))
       const color =
-        status === "Completada"
+        status === "Aceptado"
           ? "text-green-700 font-bold"
-          : status === "Pendiente"
+          : status === "Enviado"
           ? "text-yellow-700 font-bold"
           : "text-red-700 font-bold"
 
       return <p className={color}>{status}</p>
     },
-  },
-  {
-    id: "actions",
-    header: "Acciones",
-    cell: () => (
-      <div className="flex gap-2">
-        <Button size="sm" variant="default">Aprobar</Button>
-        <Button size="sm" variant="destructive">Rechazar</Button>
-      </div>
-    ),
   },
 ]
