@@ -81,7 +81,7 @@ export default function MainLayout() {
       case "Gerente de Sucursal":
         return branchManagerLinks;
         break;
-      case "Director de RR.HH":
+      case "Director De RR.HH":
         return humanResourcesDirectorLinks;
         break;
       case "Director De Compras":

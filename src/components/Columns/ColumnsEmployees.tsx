@@ -4,20 +4,24 @@ import { formatInTimeZone } from "date-fns-tz";
 
 export const ColumnsEmployees: ColumnDef<IEmployeeModel>[] = [
   {
-    accessorKey: "employeeId",
+    accessorKey: "id",
     header: "ID Empleado",
   },
   {
-    accessorKey: "fullName",
-    header: "Nombre completo",
+    accessorKey: "firstName",
+    header: "Nombres",
   },
   {
-    accessorKey: "title",
-    header: "Cargo",
+    accessorKey: "lastName",
+    header: "Apellidos",
   },
   {
-    accessorKey: "department",
-    header: "Departamento",
+    accessorKey: "roleId",
+    header: "Id de rol",
+  },
+  {
+    accessorKey: "roleName",
+    header: "Rol",
   },
   {
     accessorKey: "startDate",
@@ -50,7 +54,19 @@ export const ColumnsEmployees: ColumnDef<IEmployeeModel>[] = [
     },
   },
   {
-    accessorKey:"contractType",
-    header:"Tipo de contrato",
+    accessorKey: "phone",
+    header: "Teléfono",
+  },
+  {
+    accessorKey: "contractType",
+    header: "Tipo de contrato",
+  },
+  {
+    accessorKey:"shift",
+    header:"Turno",
+  },
+  {
+    accessorKey:"email",
+    header:"Correo electrónico",
   }
 ]
