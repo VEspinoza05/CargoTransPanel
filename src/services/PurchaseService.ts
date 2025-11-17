@@ -26,3 +26,20 @@ export const deletePurchase = async (id: number): Promise<string> => {
   const response = await axios.delete(`/Purchase/${id}`)
   return response.data;
 };
+
+export const updatePurchase =  async (id: number, updatedPurchase: any): Promise<any> => {
+
+
+  const response = await axios.put(`/Purchase/${id}`, {
+    supplierId: Number(updatedPurchase.supplierId),
+    productName: updatedPurchase.productName,
+    productDescription: updatedPurchase.productDescription,
+    quantity: updatedPurchase.quantity,
+    unitPrice: updatedPurchase.unitPrice,
+    total: (updatedPurchase.quantity * updatedPurchase.unitPrice),
+    status: updatedPurchase.status
+  });
+
+  console.log("UPDATED DATA: " + response)
+  return response;
+};

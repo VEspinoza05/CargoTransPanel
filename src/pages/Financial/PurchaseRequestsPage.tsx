@@ -7,11 +7,12 @@ import { PlusCircle } from "lucide-react"
 import type { IPurchaseModel } from "@/models/PurchaseModel";
 import { CreatePurhcaseRequestDialog } from "@/components/Dialogs/CreatePurhcaseRequestDialog";
 import { getSuppliers } from "@/services/SupplierService";
-import { createPurchase, deletePurchase, getPurchases } from "@/services/PurchaseService";
+import { createPurchase, deletePurchase, getPurchases, updatePurchase } from "@/services/PurchaseService";
 import { useAuth } from "@/contexts/AuthContext";
 import { decodeToken } from "@/layouts/MainLayout";
 import type { listComboboxElements } from "@/components/ui/combobox";
 import { DeleteAlert } from "@/components/Dialogs/DeleteAlert";
+import { EditPurchaseRequestDialog } from "@/components/Dialogs/EditPurchaseRequestDialog";
 
 interface newPurchaseRequest {
   supplierId: number,
@@ -31,6 +32,8 @@ export default function EmployeesManagementPage() {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [purchaseToDeleteId, setPurchaseToDeleteId]= useState<any>(null);
+  const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
+  const [purchaseToUpdate, setPurchaseToUpdate]= useState<any>(null);
 
   const { token } = useAuth();
   
@@ -94,8 +97,39 @@ export default function EmployeesManagementPage() {
     setPurchaseToDeleteId(null)
   }
 
+const handleUpdate = async (payload: any) => {
+    const response = await updatePurchase(payload.id, payload);
+    if(response.status === 200){
+      toast("Resultado",
+        {description: `La solicitud ${purchaseToUpdate.id} fue actualizada exitosamente.`,}
+      ); 
+
+      const updatedPurchase = response.data
+
+      setPurchases((prev) => 
+        prev.map((purchase) => 
+          updatedPurchase.id === purchase.id
+          ? { ...updatedPurchase }
+          : purchase
+        )
+      )
+    }
+    else {
+      toast("Error",
+        {description: `Ha ocurrido un error`,}
+      ); 
+    }
+
+    setOpenUpdateDialog(false)
+    setPurchaseToUpdate(null)
+  }
+
   const handleCreateDialogOpen = (newOpenState: boolean) => {
     setOpenCreateDialog(newOpenState);
+  };
+
+  const handleUpdateDialogOpen = (newOpenState: boolean) => {
+    setOpenUpdateDialog(newOpenState);
   };
 
   const handleOpenDeleteAlert = (newOpenState: boolean) => {
@@ -121,7 +155,7 @@ export default function EmployeesManagementPage() {
         ); 
       }
   
-      setOpenCreateDialog(false);
+      setOpenUpdateDialog(false);
     }
   
   const columns = [...ColumnsPurchasesRequests]
@@ -135,7 +169,17 @@ export default function EmployeesManagementPage() {
           <Button
             variant={"edit"}
             onClick={() => {
-              
+              setPurchaseToUpdate({
+                "id": row.getValue("id"),
+                "supplierId": row.getValue("supplierId"),
+                "productName": row.getValue("productName"),
+                "productDescription": row.getValue("productDescription"),
+                "quantity": row.getValue("quantity"),
+                "unitPrice": row.getValue("unitPrice"),
+                "total": row.getValue("total"),
+                "status": row.getValue("status"),
+              })
+              setOpenUpdateDialog(true)
             }}
           >
             Editar
@@ -155,7 +199,7 @@ export default function EmployeesManagementPage() {
     },
   });
 
-  console.log(purchaseToDeleteId)
+  console.log("PURCHASE REQUEST UPDATE IN PAGE: " + JSON.stringify(purchaseToUpdate))
 
   return (
     <div className="p-6 space-y-6">
@@ -190,6 +234,14 @@ export default function EmployeesManagementPage() {
         open={openDeleteAlert}
         onOpenChange={handleOpenDeleteAlert}
         submitHandler={handleDelete}
+      />
+
+      <EditPurchaseRequestDialog
+        open={openUpdateDialog}
+        onOpenChange={handleUpdateDialogOpen}
+        submitHandler={handleUpdate}
+        comboBoxDataList={suppliers}
+        purchaseToUpdate={purchaseToUpdate}
       />
     </div>
   )
