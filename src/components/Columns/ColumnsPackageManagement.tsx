@@ -34,13 +34,6 @@ export const ColumnsPackageManagement: ColumnDef<any>[] = [
     header: "Peso (lb)",
   },
   {
-    accessorKey: "status",
-    header: "Estado",
-    cell: ({ row }) => (
-      <Badge variant="secondary">{row.getValue("status")}</Badge>
-    ),
-  },
-  {
     accessorKey: "receptionDate",
     header: "Fecha de recepción",
     cell: ({row}) => {
@@ -54,9 +47,5 @@ export const ColumnsPackageManagement: ColumnDef<any>[] = [
         </>
       )
     }
-  },
-  {
-    accessorKey: "vehicleId",
-    header: "Id de vehiculo",
   },
 ];

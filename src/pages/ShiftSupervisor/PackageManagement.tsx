@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { DataTable } from "@/components/DataTable"
 import type { IPurchaseModel } from "@/models/PurchaseModel";
 import { getVehicles } from "@/services/VehicleService";
-import { getPackages } from "@/services/PackageService";
+import { changeVehicle, getPackages } from "@/services/PackageService";
 import { ColumnsPackageManagement } from "@/components/Columns/ColumnsPackageManagement";
-import { Button } from "@/components/ui/button";
 import { Combobox, type listComboboxElements } from "@/components/ui/combobox";
+import { toast } from "sonner";
 
 export default function PackageManagement() {
   const [packages, setPackages] = useState<IPurchaseModel[]>([]);
@@ -52,7 +52,7 @@ export default function PackageManagement() {
   const columns = [...ColumnsPackageManagement]
   columns.push({
     id:"Actions",
-    header: "Accion",
+    header: "Placa vehiculo",
     cell: ({row}) => 
       <div>
         <Combobox
@@ -65,13 +65,13 @@ export default function PackageManagement() {
           ]}
           externalPlaceholder="Seleccionar vehiculo"
           searchPlaceholder="Buscar vehiculo"
-          defaultValue={String(row.getValue("vehicleId") ?? "ninguno")}
-          onChange={() => {}}  
+          defaultValue={String(row.original.vehicleId ?? "ninguno")}
+          onChange={async (e) => {
+            await changeVehicle(Number(row.getValue("id")), { id: Number(row.getValue("id")), vehicleId: Number(e.target.value) })
+            toast("Vehiculo asignado")
+          }}  
           name="roleId"
         />
-        <Button>
-          Ok
-        </Button>
       </div>
   })
 
