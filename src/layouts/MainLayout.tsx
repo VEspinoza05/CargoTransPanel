@@ -33,37 +33,25 @@ export default function MainLayout() {
     logout();
   }
 
-  const branchManagerLinks = [
-    { name: "Inicio", href:"/" },
-    { name: "Clientes", href:"/BranchManaging/ClientsManagement" },
-    { name: "Asistencia", href:"/BranchManaging/BranchAttendance" },
-    { name: "Envíos", href:"/BranchManaging/ShipmentSending" },
-  ]
-
   const humanResourcesDirectorLinks = [
     { name: "Inicio", href:"/" },
     { name: "Gestion de empleados", href:"/HumanResources/EmployeesManagement"},
-    { name: "Solicitudes internas", href:"/HumanResources/InternalRequests"},
   ]
 
   const purchasesDirectorLinks = [
     { name: "Inicio", href:"/" },
-    { name: "Dashboard Compras", href:"/Acquisitions"},
-    { name: "Compras", href:"/Acquisitions/Purchases"},
+    { name: "Compras", href:"/Acquisitions/PurchaseRequests"},
     { name: "Gestión Proveedores", href:"/Acquisitions/SuppliersManagement"},
   ]
 
   const financialDirectorLinks = [
     { name: "Inicio", href:"/" },
-    { name: "Cuentas pendientes / por pagar", href:"/Financial/Accounts" },
-    { name: "Solicitudes de compra", href:"/Financial/PurchaseRequests" },
     { name: "Revision de solicitudes", href:"/Financial/PurchaseReview" },
   ]
 
   const oparetiveDirectorLinks = [
     { name: "Inicio", href:"/" },
     { name: "Gestión de flota", href:"/Operations/FleetManagement" },
-    { name: "Gestión de envíos", href:"/Operations/ShipmentsManagement" },
     { name: "Mapa de flota", href:"/Operations/FleetMap" },
   ]
 

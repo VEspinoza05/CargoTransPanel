@@ -72,14 +72,16 @@ export default function FleetManagementPage() {
     const fetchDrivers = async () => {
       try {
         const data = await getEmployees();
-        const driverList = data.map(employee => {
+        const employees = data.filter(e => e.roleId == 8)
+
+        const filteredDrivers = employees.map(employee => {
           return {
             value: String(employee.id),
             label: employee.firstName + employee.lastName
           }
         })
 
-        setDrivers(driverList)
+        setDrivers(filteredDrivers)
 
       } catch (error) {
         console.error("Error al cargar los datos de login:", error);
