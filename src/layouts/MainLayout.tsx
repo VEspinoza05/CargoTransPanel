@@ -74,9 +74,6 @@ export default function MainLayout() {
 
   const getLinks = (role: string | null) => {
     switch (role) {
-      case "Gerente de Sucursal":
-        return branchManagerLinks;
-        break;
       case "Director De RR.HH":
         return humanResourcesDirectorLinks;
         break;
