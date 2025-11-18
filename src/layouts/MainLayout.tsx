@@ -52,7 +52,6 @@ export default function MainLayout() {
   const oparetiveDirectorLinks = [
     { name: "Inicio", href:"/" },
     { name: "Gestión de flota", href:"/Operations/FleetManagement" },
-    { name: "Mapa de flota", href:"/Operations/FleetMap" },
   ]
 
   const CEOLinks = [

@@ -9,7 +9,6 @@ import HomePage from './pages/HomePage';
 import LoginLogPage from './pages/LoginLogPage';
 import EmployeesManagement from './pages/HumanResources/EmployeesManagement';
 import FleetManagementPage from './pages/Operations/FleetManagementPage';
-import FleetMapPage from './pages/Operations/FleetMapPage';
 import PurchaseRequestsPage from './pages/Financial/PurchaseRequestsPage';
 import SuppliersManagement from './pages/Financial/SuppliersManagement';
 import PurchaseReviewPage from './pages/Acquisitions/PurchaseReviewPage';
@@ -49,7 +48,6 @@ function App() {
 
               <Route path='/Operations'>
                 <Route path='FleetManagement' element={<FleetManagementPage />} />
-                <Route path='FleetMap' element={<FleetMapPage />} />
               </Route>
 
               <Route path='/ShiftSupervisor'>
