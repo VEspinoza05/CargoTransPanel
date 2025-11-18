@@ -75,6 +75,7 @@ export default function MainLayout() {
   const shiftSupervisorLinks = [
     { name: "Inicio", href:"/" },
     { name: "Facturación", href:"/ShiftSupervisor/Billing" },
+    { name: "Paquetes", href:"/ShiftSupervisor/PackageManagement" },
   ]
 
   const getLinks = (role: string | null) => {

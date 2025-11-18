@@ -23,6 +23,7 @@ import PurchaseRequestsPage from './pages/Financial/PurchaseRequestsPage';
 import SuppliersManagement from './pages/Acquisitions/SuppliersManagement';
 import PurchaseReviewPage from './pages/Financial/PurchaseReviewPage';
 import BillingPage from './pages/ShiftSupervisor/BillingPage';
+import PackageManagement from './pages/ShiftSupervisor/PackageManagement';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
 
               <Route path='/ShiftSupervisor'>
                 <Route path='Billing' element={<BillingPage />} />
+                <Route path='PackageManagement' element={<PackageManagement />} />
               </Route>
             </Route>
           </Route>
