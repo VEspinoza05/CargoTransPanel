@@ -81,6 +81,7 @@ export default function MainLayout() {
   const driverLinks = [
     { name: "Inicio", href:"/" },
     { name: "Mapa paquetes", href:"/Driving/Map" },
+    { name: "Entrega de paquetes", href:"/Driving/PackageDelivery" },
   ]
 
   const getLinks = (role: string | null) => {
