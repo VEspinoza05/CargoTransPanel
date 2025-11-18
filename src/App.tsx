@@ -17,12 +17,12 @@ import InternalRequestsPage from './pages/HumanResources/InternalRequestsPage';
 import ClientsManagementPage from './pages/BranchManagement/ClientsManagementPage';
 import BranchAttendancePage from './pages/BranchManagement/BranchAttendancePage';
 import DashboardCEOGeneralPage from './pages/CEO/DashboardCEOGeneralPage';
-import PackageReceptionPage from './pages/ShiftSupervisor/PackageReceptionPage';
 import FleetMapPage from './pages/Operations/FleetMapPage';
 import ShipmentSending from './pages/BranchManagement/ShipmentSending';
 import PurchaseRequestsPage from './pages/Financial/PurchaseRequestsPage';
 import SuppliersManagement from './pages/Acquisitions/SuppliersManagement';
 import PurchaseReviewPage from './pages/Financial/PurchaseReviewPage';
+import BillingPage from './pages/ShiftSupervisor/BillingPage';
 
 function App() {
   return (
@@ -74,7 +74,7 @@ function App() {
               </Route>
 
               <Route path='/ShiftSupervisor'>
-                <Route path='PackageReception' element={<PackageReceptionPage />} />
+                <Route path='Billing' element={<BillingPage />} />
               </Route>
             </Route>
           </Route>

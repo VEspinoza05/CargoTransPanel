@@ -1,12 +1,14 @@
 export interface IPackageModel {
-  id: string;
+  id: number;
   sender: string;
   recipient: string;
   destination: string;
-  weight: string;
+  weight: number;
   dimensions: string;
   contentType: string;
   observations: string;
   status: string;
-  receptionDate: string;
+  receptionDate: Date;
+  latitudeDestination: number;
+  longitudeDestination: number;
 }

@@ -1,6 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { formatInTimeZone } from "date-fns-tz";
 
 export type PackageData = {
   id: string;
@@ -12,10 +12,10 @@ export type PackageData = {
   receptionDate: string;
 };
 
-export const columns: ColumnDef<PackageData>[] = [
+export const ColumnsPackageReception: ColumnDef<PackageData>[] = [
   {
     accessorKey: "id",
-    header: "Código de guía",
+    header: "ID",
   },
   {
     accessorKey: "sender",
@@ -31,7 +31,7 @@ export const columns: ColumnDef<PackageData>[] = [
   },
   {
     accessorKey: "weight",
-    header: "Peso (kg)",
+    header: "Peso (lb)",
   },
   {
     accessorKey: "status",
@@ -43,14 +43,16 @@ export const columns: ColumnDef<PackageData>[] = [
   {
     accessorKey: "receptionDate",
     header: "Fecha de recepción",
-  },
-  {
-    id: "actions",
-    header: "Acciones",
-    cell: () => (
-      <Button size="sm" variant="outline">
-        Ver detalle
-      </Button>
-    ),
-  },
+    cell: ({row}) => {
+      const requestDate = String(row.getValue("receptionDate"));
+
+      const date = new Date(requestDate);
+
+      return(
+        <>
+          {formatInTimeZone(date, 'America/Costa_Rica', 'dd-MM-yyy')}
+        </>
+      )
+    }
+  }
 ];

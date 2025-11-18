@@ -74,7 +74,7 @@ export default function MainLayout() {
 
   const shiftSupervisorLinks = [
     { name: "Inicio", href:"/" },
-    { name: "Recepcion de paquetes", href:"/ShiftSupervisor/PackageReception" },
+    { name: "Facturación", href:"/ShiftSupervisor/Billing" },
   ]
 
   const getLinks = (role: string | null) => {
@@ -97,7 +97,7 @@ export default function MainLayout() {
       case "CEO":
         return CEOLinks;
         break;
-      case "Encargado de Turno":
+      case "Encargado De Turno ":
         return shiftSupervisorLinks;
         break;
       default:
