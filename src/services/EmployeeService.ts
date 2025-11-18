@@ -24,7 +24,7 @@ export const createEmployee =  async (newEmployee: any): Promise<any> => {
     contractType: newEmployee.contractType,
     shift: newEmployee.shift,
     email: newEmployee.email,
-    password: newEmployee.email,
+    password: newEmployee.password,
   });
   return response.data;
 };
