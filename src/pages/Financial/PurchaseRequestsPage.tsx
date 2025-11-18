@@ -15,17 +15,6 @@ import { DeleteAlert } from "@/components/Dialogs/DeleteAlert";
 import { EditPurchaseRequestDialog } from "@/components/Dialogs/EditPurchaseRequestDialog";
 import { RequestReviewDialog } from "@/components/Dialogs/RequestReviewDialog";
 
-interface newPurchaseRequest {
-  supplierId: number,
-  productName: string,
-  productDescription: string,
-  quantity: number,
-  unitPrice: number,
-  total: number,
-  status: string,
-}
-
-
 export default function EmployeesManagementPage() {
   const [purchases, setPurchases] = useState<IPurchaseModel[]>([]);
   const [loadingPurchases, setLoadingPurchases] = useState(true);

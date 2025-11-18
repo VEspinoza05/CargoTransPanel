@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react"
 import { DataTable } from "@/components/DataTable"
 import type { IPurchaseModel } from "@/models/PurchaseModel";
-import { useAuth } from "@/contexts/AuthContext";
 import { getVehicles } from "@/services/VehicleService";
-import type { IVehicleModel } from "@/models/VehicleModel";
 import { getPackages } from "@/services/PackageService";
 import { ColumnsPackageManagement } from "@/components/Columns/ColumnsPackageManagement";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Combobox, type listComboboxElements } from "@/components/ui/combobox";
 
@@ -14,7 +11,6 @@ export default function PackageManagement() {
   const [packages, setPackages] = useState<IPurchaseModel[]>([]);
   const [vehicles, setVehicles] = useState<listComboboxElements[]>([]);
   const [loadingPurchases, setLoadingPurchases] = useState(true);
-  const { token } = useAuth();
   
 
   useEffect(() => {

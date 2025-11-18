@@ -1,18 +1,9 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { formatInTimeZone } from "date-fns-tz";
+import type { IPackageModel } from "@/models/PackageModel";
 
-export type PackageData = {
-  id: string;
-  sender: string;
-  recipient: string;
-  destination: string;
-  weight: string;
-  status: string;
-  receptionDate: string;
-};
-
-export const ColumnsPackageReception: ColumnDef<PackageData>[] = [
+export const ColumnsPackageReception: ColumnDef<IPackageModel>[] = [
   {
     accessorKey: "id",
     header: "ID",

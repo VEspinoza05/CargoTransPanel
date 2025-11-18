@@ -3,7 +3,6 @@ import { ColumnsPurchasesRequests } from "@/components/Columns/ColumnsPurchasesR
 import { useEffect, useState } from "react"
 import { toast } from "sonner";
 import { DataTable } from "@/components/DataTable"
-import { PlusCircle } from "lucide-react"
 import type { IPurchaseModel } from "@/models/PurchaseModel";
 import { CreatePurhcaseRequestDialog } from "@/components/Dialogs/CreatePurhcaseRequestDialog";
 import { getSuppliers } from "@/services/SupplierService";
@@ -15,17 +14,6 @@ import { DeleteAlert } from "@/components/Dialogs/DeleteAlert";
 import { EditPurchaseRequestDialog } from "@/components/Dialogs/EditPurchaseRequestDialog";
 import { RequestReviewDialog } from "@/components/Dialogs/RequestReviewDialog";
 import { ReviewPurchaseDialog } from "@/components/Dialogs/ReviewPurchaseDialog";
-
-interface newPurchaseRequest {
-  supplierId: number,
-  productName: string,
-  productDescription: string,
-  quantity: number,
-  unitPrice: number,
-  total: number,
-  status: string,
-}
-
 
 export default function PurchaseReviewPage() {
   const [purchases, setPurchases] = useState<IPurchaseModel[]>([]);
