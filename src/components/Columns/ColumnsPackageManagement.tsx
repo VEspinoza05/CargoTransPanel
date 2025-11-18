@@ -1,5 +1,4 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
 import { formatInTimeZone } from "date-fns-tz";
 
 export type PackageData = {

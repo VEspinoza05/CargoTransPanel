@@ -78,6 +78,11 @@ export default function MainLayout() {
     { name: "Paquetes", href:"/ShiftSupervisor/PackageManagement" },
   ]
 
+  const driverLinks = [
+    { name: "Inicio", href:"/" },
+    { name: "Mapa paquetes", href:"/Driving/Map" },
+  ]
+
   const getLinks = (role: string | null) => {
     switch (role) {
       case "Gerente de Sucursal":
@@ -100,6 +105,9 @@ export default function MainLayout() {
         break;
       case "Encargado De Turno ":
         return shiftSupervisorLinks;
+        break;
+      case "Conductor":
+        return driverLinks;
         break;
       default:
         return [];

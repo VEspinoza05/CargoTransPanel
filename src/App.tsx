@@ -24,6 +24,7 @@ import SuppliersManagement from './pages/Acquisitions/SuppliersManagement';
 import PurchaseReviewPage from './pages/Financial/PurchaseReviewPage';
 import BillingPage from './pages/ShiftSupervisor/BillingPage';
 import PackageManagement from './pages/ShiftSupervisor/PackageManagement';
+import MultipleMarkersMap from './pages/Driver/PackagesMap';
 
 function App() {
   return (
@@ -77,6 +78,10 @@ function App() {
               <Route path='/ShiftSupervisor'>
                 <Route path='Billing' element={<BillingPage />} />
                 <Route path='PackageManagement' element={<PackageManagement />} />
+              </Route>
+
+              <Route path='/Driving'>
+                <Route path='Map' element={<MultipleMarkersMap />} />
               </Route>
             </Route>
           </Route>
