@@ -57,6 +57,7 @@ export default function MainLayout() {
     { name: "Inicio", href:"/" },
     { name: "Cuentas pendientes / por pagar", href:"/Financial/Accounts" },
     { name: "Solicitudes de compra", href:"/Financial/PurchaseRequests" },
+    { name: "Revision de solicitudes", href:"/Financial/PurchaseReview" },
   ]
 
   const oparetiveDirectorLinks = [

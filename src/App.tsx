@@ -22,6 +22,7 @@ import FleetMapPage from './pages/Operations/FleetMapPage';
 import ShipmentSending from './pages/BranchManagement/ShipmentSending';
 import PurchaseRequestsPage from './pages/Financial/PurchaseRequestsPage';
 import SuppliersManagement from './pages/Acquisitions/SuppliersManagement';
+import PurchaseReviewPage from './pages/Financial/PurchaseReviewPage';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
               <Route path='/Financial'>
                 <Route path='Accounts' element={<AccountsPage />} />
                 <Route path='PurchaseRequests' element={<PurchaseRequestsPage />} />
+                <Route path='PurchaseReview' element={<PurchaseReviewPage />} />
               </Route>
 
               <Route path='/Operations'>

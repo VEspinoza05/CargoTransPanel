@@ -41,11 +41,14 @@ export function RequestReviewDialog({open, onOpenChange, reviewDataParam}: Delet
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Revisión de la solicitud de compra {reviewData?.purchaseRequestId ||""}</DialogTitle>
+              <DialogDescription>
+                Detalles de la revisión
+              </DialogDescription>
             </DialogHeader>
             <div>
               <h1 className="font-bold">Fecha de revisión:</h1>
               <p>
-              {formatInTimeZone(String(reviewData?.revisionDate || new Date()), 'America/Costa_Rica', 'dd-MM-yyyy hh:mm a')}
+              {formatInTimeZone(reviewData?.revisionDate || new Date(), 'America/Costa_Rica', 'dd-MM-yyyy hh:mm a')}
               </p>
               <h1 className="font-bold">Estado:</h1>
               <p>{reviewData?.status || ""}</p>

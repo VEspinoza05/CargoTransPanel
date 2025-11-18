@@ -43,3 +43,15 @@ export const updatePurchase =  async (id: number, updatedPurchase: any): Promise
   console.log("UPDATED DATA: " + response)
   return response;
 };
+
+export const reviewPurchase =  async (id: number | null, reviewData: any): Promise<any> => {
+  if (id === null) return;
+
+  const response = await axios.put(`/Purchase/Review/${id}`, {
+    status:reviewData.status,
+    revisionDescription: reviewData.revisionDescription,
+  });
+
+  console.log("UPDATED DATA: " + response)
+  return response;
+};
