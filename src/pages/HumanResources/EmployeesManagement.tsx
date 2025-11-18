@@ -158,10 +158,15 @@ export default function EmployeesManagementPage() {
         {description: `El empleado ${employeeToUpdate.id} fue actualizado exitosamente.`,}
       ); 
 
+      const findLabelRole = (e:IEmployeeModel) => {
+        const roleObj = roles.find(r => r.value == String(e.roleId))
+        return roleObj?.label
+      }
+
       setEmployees((prev) => 
         prev.map((employee) => 
           employeeToUpdate.id === employee.id
-          ? { ...employeeToUpdate }
+          ? { ...employeeToUpdate, startDate : employee.startDate, roleName: findLabelRole(employee) }
           : employee
         )
       )
@@ -190,6 +195,17 @@ export default function EmployeesManagementPage() {
     const { name, value } = event.target;
     console.log("Handler COMBOBOX: " + name + ":" + value)
     setNewEmployee((previousEmployeeData: any) => ({
+      ...previousEmployeeData,
+      [name!]: value,
+    }));
+  };
+
+  const handleInputComboboxUpdateChange = (
+    event: { target: { name?: string; value: string } }
+  ) => {
+    const { name, value } = event.target;
+    console.log("Handler COMBOBOX: " + name + ":" + value)
+    setEmployeeToUpdate((previousEmployeeData: any) => ({
       ...previousEmployeeData,
       [name!]: value,
     }));
@@ -258,29 +274,20 @@ export default function EmployeesManagementPage() {
             onClick={() => {
               setEmployeeToUpdate({
                 id: row.getValue("id"),
-                firstName: row.getValue(""),
-                lastName: row.getValue(""),
-                roleId: row.getValue(""),
-                status: row.getValue(""),
-                phone: row.getValue(""),
-                contractType: row.getValue(""),
-                shift: row.getValue(""),
-                email: row.getValue(""),
+                firstName: row.getValue("firstName"),
+                lastName: row.getValue("lastName"),
+                roleId: row.getValue("roleId"),
+                status: row.getValue("status"),
+                phone: row.getValue("phone"),
+                contractType: row.getValue("contractType"),
+                shift: row.getValue("shift"),
+                email: row.getValue("email"),
               })
 
               setOpenEditDialog(true)
             }}
           >
             Editar
-          </Button>
-          {/* Password Update Button */}
-          <Button
-            variant={"default"}
-            onClick={() => {
-              
-            }}
-          >
-            Cambiar contraseña
           </Button>
           {/* Delete Button*/}
           <Button
@@ -427,23 +434,52 @@ export default function EmployeesManagementPage() {
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4">
-              <div className="grid gap-3">
-                <Label htmlFor="name-1">Nombre</Label>
-                <Input onChange={handleInputUpdateChange} id="name-1" name="name" value={employeeToUpdate?.name || ""}/>
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="email-1">Correo electrónico</Label>
-                <Input onChange={handleInputUpdateChange} id="email-1" name="email" value={employeeToUpdate?.email || ""}/>
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="address-1">Dirección</Label>
-                <Input onChange={handleInputUpdateChange} id="address-1" name="address" value={employeeToUpdate?.address || ""}/>
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="phone-1">Teléfono</Label>
-                <Input onChange={handleInputUpdateChange} id="phone-1" name="phone" value={employeeToUpdate?.phone || ""}/>
-              </div>
+            <div className="grid gap-3">
+              <Label htmlFor="firstName-5">Nombres</Label>
+              <Input onChange={handleInputUpdateChange} id="name-5" name="firstName" value={employeeToUpdate?.firstName || ""}/>
             </div>
+            <div className="grid gap-3">
+              <Label htmlFor="lastName-5">Apellidos</Label>
+              <Input onChange={handleInputUpdateChange} id="name-5" name="lastName" value={employeeToUpdate?.lastName || ""}/>
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="roleId-5">Rol</Label>
+              <Combobox
+                dataList={[
+                  {
+                    value: "ninguno",
+                    label: "Ninguno",
+                  },
+                  ...roles
+                ]}
+                externalPlaceholder="Seleccionar rol"
+                searchPlaceholder="Buscar rol"
+                defaultValue={String(employeeToUpdate?.roleId || "")}
+                onChange={handleInputComboboxUpdateChange}  
+                name="roleId"
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="status-5">Estado</Label>
+              <Input onChange={handleInputUpdateChange} id="status-5" name="status" value={employeeToUpdate?.status || ""}/>
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="phone-5">Teléfono</Label>
+              <Input onChange={handleInputUpdateChange} id="phone-5" name="phone"  value={employeeToUpdate?.phone || ""}/>
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="contractType-5">Tipo de contrato</Label>
+              <Input onChange={handleInputUpdateChange} id="contractType-5" name="contractType" value={employeeToUpdate?.contractType || ""}/>
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="shift-5">Turno</Label>
+              <Input onChange={handleInputUpdateChange} id="shift-5" name="shift"  value={employeeToUpdate?.shift || ""}/>
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="email-5">Correo electrónico</Label>
+              <Input onChange={handleInputUpdateChange} id="email-5" name="email"  value={employeeToUpdate?.email || ""}/>
+            </div>
+          </div>
             <DialogFooter>
               <DialogClose asChild>
                 <Button  variant="outline">Cancelar</Button>

@@ -38,7 +38,14 @@ export const updateEmployeePassword =  async (id: number, password: string): Pro
 
 export const updateEmployee =  async (id: number, updatedEmployee: any): Promise<any> => {
   const response = await axios.put(`/Employee/${id}`, {
-    //TODO: write properties
+    firstName: updatedEmployee.firstName,
+    lastName: updatedEmployee.lastName,
+    roleId: updatedEmployee.roleId,
+    status: updatedEmployee.status,
+    phone: updatedEmployee.phone,
+    contractType: updatedEmployee.contractType,
+    shift: updatedEmployee.shift,
+    email: updatedEmployee.email
   });
   return response.data;
 }
