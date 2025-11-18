@@ -1,5 +1,4 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import type { InternalRequest } from "@/models/InternalRequest"
 
@@ -27,16 +26,6 @@ export const ColumnsInternalRequest: ColumnDef<InternalRequest>[] = [
   {
     accessorKey: "status",
     header: "Estado",
-    cell: ({ row }) => {
-      const status = row.getValue("status") as string
-      const color =
-        status === "Aprobada"
-          ? "bg-green-500"
-          : status === "Rechazada"
-          ? "bg-red-500"
-          : "bg-yellow-500"
-      return <Badge className={`${color} text-white`}>{status}</Badge>
-    },
   },
   {
     id: "actions",

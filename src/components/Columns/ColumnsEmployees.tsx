@@ -41,17 +41,6 @@ export const ColumnsEmployees: ColumnDef<IEmployeeModel>[] = [
   {
     accessorKey: "status",
     header: "Estado",
-    cell: ({ row }) => {
-      const status = String(row.getValue("status"))
-      const color =
-        status === "Activo"
-          ? "text-green-700 font-bold"
-          : status === "En reposo"
-          ? "text-yellow-700 font-bold"
-          : "text-red-700 font-bold"
-
-      return <p className={color}>{status}</p>
-    },
   },
   {
     accessorKey: "phone",

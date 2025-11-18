@@ -1,5 +1,4 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
 import type { IAccountModel } from "@/models/AccountModel";
 
 export const columns: ColumnDef<IAccountModel>[] = [
@@ -26,21 +25,5 @@ export const columns: ColumnDef<IAccountModel>[] = [
   {
     accessorKey: "status",
     header: "Estado",
-    cell: ({ row }) => {
-      const status = row.getValue("status") as string;
-      return (
-        <Badge
-          variant={
-            status === "Pagado"
-              ? "default"
-              : status === "Pendiente"
-              ? "destructive"
-              : "secondary"
-          }
-        >
-          {status}
-        </Badge>
-      );
-    },
   },
 ];

@@ -1,5 +1,4 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
 import { formatInTimeZone } from "date-fns-tz";
 import type { IPackageModel } from "@/models/PackageModel";
 
@@ -27,9 +26,6 @@ export const ColumnsPackageDelivery: ColumnDef<IPackageModel>[] = [
   {
     accessorKey: "status",
     header: "Estado",
-    cell: ({ row }) => (
-      <Badge variant="secondary">{row.getValue("status")}</Badge>
-    ),
   },
   {
     accessorKey: "receptionDate",

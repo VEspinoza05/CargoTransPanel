@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge"
 import type { IVehicleModel } from "@/models/VehicleModel";
 import type { ColumnDef } from "@tanstack/react-table"
 import { formatInTimeZone } from "date-fns-tz"
@@ -23,21 +22,6 @@ export const columnsFleet: ColumnDef<IVehicleModel>[] = [
   {
     accessorKey: "status",
     header: "Estado",
-    cell: ({ row }) => {
-      const estado = row.getValue("status") as string
-      const color =
-        estado === "En ruta"
-          ? "bg-blue-500"
-          : estado === "Disponible"
-          ? "bg-green-500"
-          : "bg-yellow-500"
-
-      return (
-        <Badge className={`${color} text-white`}>
-          {estado}
-        </Badge>
-      )
-    },
   },
   {
     accessorKey: "driverId",

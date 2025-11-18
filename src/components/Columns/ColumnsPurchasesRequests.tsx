@@ -57,16 +57,5 @@ export const ColumnsPurchasesRequests: ColumnDef<IPurchaseModel>[] = [
   {
     accessorKey: "status",
     header: "Estado",
-    cell: ({ row }) => {
-      const status = String(row.getValue("status"))
-      const color =
-        status === "Aceptado"
-          ? "text-green-700 font-bold"
-          : status === "Enviado"
-          ? "text-yellow-700 font-bold"
-          : "text-red-700 font-bold"
-
-      return <p className={color}>{status}</p>
-    },
   },
 ]

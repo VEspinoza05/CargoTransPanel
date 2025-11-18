@@ -31,15 +31,6 @@ export const ColumnsShipment: ColumnDef<IShipmentModel>[] = [
   {
     accessorKey: "state",
     header: "Estado",
-    cell: ({row}) => {
-      const shipmentState = String(row.getValue("state"));
-
-      return(
-        <p className={shipmentState === "Enviado" ? "font-bold text-yellow-700" : "font-bold text-green-700" }>
-          {shipmentState}
-        </p>
-      )
-    }
   },
   {
     accessorKey: "customerName",
