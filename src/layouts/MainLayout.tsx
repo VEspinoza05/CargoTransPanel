@@ -149,8 +149,6 @@ export default function MainLayout() {
             </SidebarContent>
             <SidebarFooter>
               <h3 className="font-bold text-base">Datos de usuario</h3>
-              {/* TODO: Add surname  */}
-              <p>{tokenClaims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]}</p>
               <p>{tokenClaims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}</p>
               <p>{tokenClaims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]}</p>
               <Button onClick={handleLogout}>
